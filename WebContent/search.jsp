@@ -26,8 +26,7 @@
     <label>名前: <input type="text" name="studentName"></label><br>
     <label>学籍番号: <input type="text" name="studentId"></label><br>
     <label>入学年度:
-  <input type="number" name="enrollmentYear" min="1000" max="9999">
-</label><br>
+  <input type="number" name="enrollmentYear" min="2020" max="2100"></label><br>
     <input type="submit" value="検索">
   </form>
 
