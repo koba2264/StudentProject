@@ -1,37 +1,32 @@
 package bean;
 
-/**
- * Servlet implementation class Subject
+/***
+ * 科目情報を保存するBean
+ * @author s_kobayashi
+ *
  */
 public class Subject implements java.io.Serializable {
-	// クラスID
-	private String classId;
+	//	科目ID
+	private String id;
 	// 科目名
-	private String subjectName;
-	// 学籍番号
-	private String studentId;
+	private String name;
 
 
 	// ゲッター
-	public String getClassId(){
-		return this.classId;
+	public String getId(){
+		return this.id;
 	}
-	public String getSubjectName(){
-		return this.subjectName;
+	public String getName(){
+		return this.name;
 	}
-	public String getStudentId(){
-		return this.studentId;
-	}
+
 
 
 	// セッター
-	public void setClassId(String classId){
-		this.classId = classId;
+	public void setId(String Id){
+		this.id = Id;
 	}
-	public void setSubjectName(String subjectName){
-		this.subjectName = subjectName;
-	}
-	public void setStudentId(String studentId){
-		this.studentId = studentId;
+	public void setSubjectName(String name){
+		this.name = name;
 	}
 }

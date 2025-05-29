@@ -5,68 +5,59 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServlet;
 
-/**
- * Servlet implementation class Student
+/***
+ * 学生情報を保存するBean
+ * @author s_kobayashi
+ *
  */
 public class Student extends HttpServlet {
-	// 学校ID
-	private String schoolId;
-	// クラスID
-	private String classId;
 	// 学籍番号
-	private String studentId;
+	private String id;
 	// 生徒の名前
-	private String studentName;
+	private String name;
 	// 性別
-	private String gender;
+	private Gender gender;
 	// 入学年度
-	private String enrollmentYear;
+	private int enrollmentYear;
+	// クラス情報
+	private Class myClass;
 	//	在学フラグ
 	private boolean isAttend;
 	//	得点情報<key: subjectId, value: 得点情報>
 	private Map<String, Score> scores = new HashMap<>();
 
 	//ゲッター
-	public String getSchoolId(){
-		return this.schoolId;
+	public String getId(){
+		return this.id;
 	}
-	public String getClassId(){
-		return this.classId;
+	public String getName(){
+		return this.name;
 	}
-	public String getStudentId(){
-		return this.studentId;
-	}
-	public String getStudentName(){
-		return this.studentName;
-	}
-	public String getGender(){
+	public Gender getGender(){
 		return this.gender;
 	}
-	public String getEnrollmentYear(){
+	public int getEnrollmentYear(){
 		return this.enrollmentYear;
+	}
+	public Class getMyClass() {
+		return myClass;
 	}
 
 
 	// セッター
-	public void setSchoolId(String schoolId){
-		this.schoolId = schoolId;
+	public void setId(String id){
+		this.id = id;
 	}
-	public void setClassId(String classId){
-		this.classId = classId;
+	public void setName(String name){
+		this.name = name;
 	}
-	public void setStudentId(String studentId){
-		this.studentId = studentId;
-	}
-	public void setStudentName(String studentName){
-		this.studentName = studentName;
-	}
-	public void setGender(String gender){
+	public void setGender(Gender gender){
 		this.gender = gender;
 	}
-	public void setEnrollmentYear(String enrollmentYear){
+	public void setEnrollmentYear(int enrollmentYear){
 		this.enrollmentYear = enrollmentYear;
 	}
-	public boolean isAttend() {
+	public boolean getIsAttend() {
 		return isAttend;
 	}
 	public void setAttend(boolean isAttend) {
@@ -76,6 +67,9 @@ public class Student extends HttpServlet {
 		return scores;
 	}
 	public void setScores(Score score) {
-		this.scores.put(score.getSubjectId(), score);
+		this.scores.put(score.getSubject().getId(), score);
+	}
+	public void setMyClass(Class myClass) {
+		this.myClass = myClass;
 	}
 }
