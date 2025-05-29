@@ -13,7 +13,7 @@
   <p>科目名: ${param.subjectName}</p>
 
   <!-- 登録確定ボタン -->
-  <form action="SubjectRegisterServlet" method="post">
+  <form action="SubjectRegisterServlet.action" method="post">
     <input type="hidden" name="classId" value="${param.classId}">
     <input type="hidden" name="studentId" value="${param.studentId}">
     <input type="hidden" name="subjectName" value="${param.subjectName}">

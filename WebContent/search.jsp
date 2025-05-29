@@ -20,7 +20,7 @@
 <body>
   <h2>学生情報一覧検索</h2>
 
-  <form action="SearchStudentServlet" method="post">
+  <form action="SearchStudentServlet.action" method="post">
     <label>学校: <input type="text" name="school"></label><br>
     <label>クラス: <input type="text" name="className"></label><br>
     <label>名前: <input type="text" name="studentName"></label><br>
