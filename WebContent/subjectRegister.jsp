@@ -19,6 +19,9 @@
 
         <input type="submit" value="登録">
     </form>
+    <form action="mainMenu.jsp" method="get">
+    <input type="submit" value="戻る">
+  </form>
     <!-- ↑↑↑ ここまで form ↑↑↑ -->
 
 </body>

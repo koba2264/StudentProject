@@ -6,16 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <title>学生情報検索</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-    table, th, td {
-      border: 1px solid gray;
-      border-collapse: collapse;
-      padding: 6px;
-    }
-  </style>
+
 </head>
 <body>
   <h2>学生情報一覧検索</h2>
