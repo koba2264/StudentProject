@@ -11,6 +11,6 @@
         <li>科目名: ${subjectName}</li>
         <li>学籍番号: ${studentId}</li>
     </ul>
-    <a href="subjectRegister.jsp">戻る</a>
+    <a href="SubjectRegister.actino">戻る</a>
 </body>
 </html>

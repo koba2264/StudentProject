@@ -21,7 +21,7 @@
   </form>
 
   <!-- 戻るボタン -->
-  <form action="subjectRegister.jsp" method="get">
+  <form action="SubjectRegister.action" method="get">
     <input type="submit" value="戻る">
   </form>
 </body>
