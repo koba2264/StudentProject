@@ -1,5 +1,8 @@
 package bean;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServlet;
 
 /**
@@ -18,7 +21,10 @@ public class Student extends HttpServlet {
 	private String gender;
 	// 入学年度
 	private String enrollmentYear;
-
+	//	在学フラグ
+	private boolean isAttend;
+	//	得点情報<key: subjectId, value: 得点情報>
+	private Map<String, Score> scores = new HashMap<>();
 
 	//ゲッター
 	public String getSchoolId(){
@@ -59,5 +65,17 @@ public class Student extends HttpServlet {
 	}
 	public void setEnrollmentYear(String enrollmentYear){
 		this.enrollmentYear = enrollmentYear;
+	}
+	public boolean isAttend() {
+		return isAttend;
+	}
+	public void setAttend(boolean isAttend) {
+		this.isAttend = isAttend;
+	}
+	public Map<String, Score> getScores() {
+		return scores;
+	}
+	public void setScores(Score score) {
+		this.scores.put(score.getSubjectId(), score);
 	}
 }
