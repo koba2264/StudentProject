@@ -7,7 +7,7 @@
 <body>
   <h2>ログイン画面</h2>
 
-  <form action="LoginServlet" method="post">
+  <form action="LoginServlet.action" method="post">
     <label for="userId">ユーザーID:</label>
     <input type="text" name="userId" id="userId" required><br><br>
 
