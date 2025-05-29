@@ -7,7 +7,7 @@
 
     <h2>科目情報 登録フォーム</h2>
 
-    <form action="subjectConfirm.jsp" method="post">
+    <form action="subjectConfirm.action" method="post">
         <label for="classId">クラスID:</label><br>
         <input type="text" id="classId" name="classId" required><br><br>
 

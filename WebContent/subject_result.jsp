@@ -12,7 +12,7 @@
         <li>科目名: ${subjectName}</li>
         <li>学籍番号: ${studentId}</li>
     </ul>
-  <form action="subjectRegister.jsp" method="get">
+  <form action="subjectRegister.action" method="get">
     <input type="submit" value="戻る">
   </form>
 </body>
