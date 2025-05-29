@@ -9,7 +9,7 @@
 <body>
 	  <h2>学生情報管理</h2>
   <ul>
-    <li><a href="studentRegister.jsp">学生情報の登録</a></li>
+    <li><a href="StudentRegister.action">学生情報の登録</a></li>
     <li><a href="studentView.jsp">学生情報の一覧表示</a></li>
   </ul>
 </body>
