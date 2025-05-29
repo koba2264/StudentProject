@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServlet;
  */
 public class Student extends HttpServlet {
 	// 学籍番号
-	private String studentId;
+	private String id;
 	// 生徒の名前
-	private String studentName;
+	private String name;
 	// 性別
 	private Gender gender;
 	// 入学年度
-	private String enrollmentYear;
+	private int enrollmentYear;
 	// クラス情報
 	private Class myClass;
 	//	在学フラグ
@@ -27,16 +27,16 @@ public class Student extends HttpServlet {
 	private Map<String, Score> scores = new HashMap<>();
 
 	//ゲッター
-	public String getStudentId(){
-		return this.studentId;
+	public String getId(){
+		return this.id;
 	}
-	public String getStudentName(){
-		return this.studentName;
+	public String getName(){
+		return this.name;
 	}
 	public Gender getGender(){
 		return this.gender;
 	}
-	public String getEnrollmentYear(){
+	public int getEnrollmentYear(){
 		return this.enrollmentYear;
 	}
 	public Class getMyClass() {
@@ -45,19 +45,19 @@ public class Student extends HttpServlet {
 
 
 	// セッター
-	public void setStudentId(String studentId){
-		this.studentId = studentId;
+	public void setId(String id){
+		this.id = id;
 	}
-	public void setStudentName(String studentName){
-		this.studentName = studentName;
+	public void setName(String name){
+		this.name = name;
 	}
 	public void setGender(Gender gender){
 		this.gender = gender;
 	}
-	public void setEnrollmentYear(String enrollmentYear){
+	public void setEnrollmentYear(int enrollmentYear){
 		this.enrollmentYear = enrollmentYear;
 	}
-	public boolean isAttend() {
+	public boolean getIsAttend() {
 		return isAttend;
 	}
 	public void setAttend(boolean isAttend) {
