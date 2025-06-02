@@ -9,7 +9,7 @@ import java.util.List;
  * @author s_kobayashi
  *
  */
-public class Class implements Serializable {
+public class MyClass implements Serializable {
 	// クラスID
 	private String id;
 	// 学校情報

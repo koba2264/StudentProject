@@ -20,7 +20,7 @@ public class Student extends HttpServlet {
 	// 入学年度
 	private int enrollmentYear;
 	// クラス情報
-	private Class myClass;
+	private MyClass myClass;
 	//	在学フラグ
 	private boolean isAttend;
 	//	得点情報<key: subjectId, value: 得点情報>
@@ -39,10 +39,16 @@ public class Student extends HttpServlet {
 	public int getEnrollmentYear(){
 		return this.enrollmentYear;
 	}
-	public Class getMyClass() {
+	public MyClass getMyClass() {
 		return myClass;
 	}
 
+	public boolean getIsAttend() {
+		return isAttend;
+	}
+	public Map<String, Score> getScores() {
+		return scores;
+	}
 
 	// セッター
 	public void setId(String id){
@@ -57,19 +63,13 @@ public class Student extends HttpServlet {
 	public void setEnrollmentYear(int enrollmentYear){
 		this.enrollmentYear = enrollmentYear;
 	}
-	public boolean getIsAttend() {
-		return isAttend;
-	}
 	public void setAttend(boolean isAttend) {
 		this.isAttend = isAttend;
-	}
-	public Map<String, Score> getScores() {
-		return scores;
 	}
 	public void setScores(Score score) {
 		this.scores.put(score.getSubject().getId(), score);
 	}
-	public void setMyClass(Class myClass) {
+	public void setMyClass(MyClass myClass) {
 		this.myClass = myClass;
 	}
 }
