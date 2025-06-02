@@ -16,10 +16,10 @@ public class Class implements Serializable {
 	private School school;
 	// クラス名
 	private String name;
+
 	// 受講科目
 	private List<Subject> subjects = new ArrayList<>();
 
-	// ゲッター
 	public String getId() {
 		return id;
 	}

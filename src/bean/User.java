@@ -1,5 +1,8 @@
 package bean;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Servlet implementation class User
  */
@@ -7,9 +10,9 @@ public class User implements java.io.Serializable {
 	// 利用者ID
 	private String userId;
 	// 学校ID
-	private String schoolId;
+	private Map<String, School> school = new HashMap<>();
 	// 権限ID
-	private String roleId;
+	private Map<String, Role> role = new HashMap<>();
 	// 名前
 	private String studentName;
 	// パスワード
@@ -20,11 +23,11 @@ public class User implements java.io.Serializable {
 	public String getUserId(){
 		return this.userId;
 	}
-	public String getSchoolId(){
-		return this.schoolId;
+	public Map<String, School> getSchool(){
+		return this.school;
 	}
-	public String getRoleId(){
-		return this.roleId;
+	public Map<String, Role> getRole(){
+		return this.role;
 	}
 	public String getStudentName(){
 		return this.studentName;
@@ -38,11 +41,11 @@ public class User implements java.io.Serializable {
 	public void setUserId(String userId){
 		this.userId = userId;
 	}
-	public void setSchoolId(String schoolId){
-		this.schoolId = schoolId;
+	public void setSchool(Map<String, School> school){
+		this.school = school;
 	}
-	public void setRoleId(String roleId){
-		this.roleId = roleId;
+	public void setRole(Map<String, Role> role){
+		this.role = role;
 	}
 	public void setStudentName(String studentName){
 		this.studentName = studentName;
