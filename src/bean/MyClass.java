@@ -43,7 +43,10 @@ public class MyClass implements Serializable {
 	public void setSchool(School school) {
 		this.school = school;
 	}
-	public void setSubjects(Subject subject) {
+	public void setSubjects(List<Subject> subjects) {
+		this.subjects = subjects;
+	}
+	public void setSubject(Subject subject) {
 		this.subjects.add(subject);
 	}
 }
