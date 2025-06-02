@@ -16,6 +16,7 @@
     <li><a href="Subject.action">科目情報管理</a></li>
     <li><a href="Role.action">権限管理</a></li>
     <li><a href="Logout.action">ログアウト</a></li>
-  </ul>
+  </ul><br>
+  <p>ログインユーザー:${ sessionScope.user.studentName }</p>
 </body>
 </html>
