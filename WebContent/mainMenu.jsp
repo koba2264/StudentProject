@@ -11,7 +11,7 @@
 <body>
   <h2>メインメニュー</h2>
   <ul>
-    <li><a href="Studentaction">学生情報管理</a></li>
+    <li><a href="Student.action">学生情報管理</a></li>
     <li><a href="Score.action">得点情報管理</a></li>
     <li><a href="Subject.action">科目情報管理</a></li>
     <li><a href="Role.action">権限管理</a></li>
