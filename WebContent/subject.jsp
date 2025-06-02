@@ -7,10 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	  <h2>学生情報管理</h2>
+	  <h2>科目情報管理</h2>
   <ul>
-    <li><a href="StudentRegister.action">学生情報の登録</a></li>
-    <li><a href="StudentView.action">学生情報の一覧表示</a></li>
+    <li><a href="SubjectRegister.action">科目情報の登録</a></li>
+    <li><a href="search.jsp">科目情報の一覧表示</a></li>
   </ul>
 </body>
 </html>

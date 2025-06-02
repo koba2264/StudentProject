@@ -1,35 +1,43 @@
+<%@ page import="java.util.List, java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page session="true" %>
-
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <title>学生情報検索</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-    table, th, td {
-      border: 1px solid gray;
-      border-collapse: collapse;
-      padding: 6px;
-    }
-  </style>
-</head>
 <body>
   <h2>学生情報一覧検索</h2>
 
-  <form action="SearchStudentServlet.action" method="post">
-    <label>クラス: <input type="text" name="className"></label><br>
-    <label>名前: <input type="text" name="studentName"></label><br>
-    <label>学籍番号: <input type="text" name="studentId"></label><br>
-  </form>
+  <!-- 検索フォーム -->
+  <div class="form-section">
+    <form action="SearchStudentServlet" method="post">
+      <label>クラス:
+        <select name="classId">
+        <option value="">選択してください</option>
+          <%
+  List<Map<String, String>> classList =
+    (List<Map<String, String>>) request.getAttribute("classList");
 
-  <br>
+  if (classList != null) {
+    for (Map<String, String> cls : classList) {
+%>
+      <option value="<%= cls.get("name") %>"><%= cls.get("name") %></option>
+<%
+    }
+  }
+%>
+        </select>
+      </label><br>
 
+      <label>名前: <input type="text" name="studentName"></label><br>
+      <label>学籍番号: <input type="text" name="studentId"></label><br>
+      <input type="submit" value="検索">
+    </form>
+  </div>
+
+  <!-- 検索結果 -->
   <%
-    // 検索結果がある場合表示（List<Map<String, String>>形式を仮定）
     java.util.List<java.util.Map<String, String>> results =
         (java.util.List<java.util.Map<String, String>>) request.getAttribute("resultList");
 
@@ -37,11 +45,9 @@
   %>
     <table>
       <tr>
-        <th>学校</th>
         <th>クラス</th>
         <th>名前</th>
         <th>学籍番号</th>
-        <th>入学年度</th>
       </tr>
       <%
         for (java.util.Map<String, String> student : results) {

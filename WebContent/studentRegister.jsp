@@ -9,7 +9,7 @@
 </head>
 <body>
   <h2>学生情報 登録フォーム</h2>
-<form action="StudentRegisterServlet" method="post">
+<form action="studentConfirm.action" method="post">
   <label>学籍番号: <input type="text" name="studentId" required></label><br>
   <label>名前: <input type="text" name="studentName" required></label><br>
   <label>クラスID: <input type="text" name="classId" required></label><br>
@@ -24,7 +24,6 @@
   <label>入学年度: <input type="number" name="enrollmentYear" min="1000" max="9999" required></label><br><br>
   <input type="submit" value="登録">
 </form>
-    </form>
     <form action="mainMenu.jsp" method="get">
     <input type="submit" value="戻る">
   </form>
