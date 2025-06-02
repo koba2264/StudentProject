@@ -6,14 +6,12 @@ import javax.servlet.http.HttpServletResponse;
 import tool.Action;
 
 /**
- * Servlet implementation class StudentRegisterAction
+ * Servlet implementation class StudentViewAction
  */
-public class StudentRegisterAction extends Action {
+public class StudentViewAction extends Action {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
-		System.out.println("iii");
-		return "studentRegister.jsp";
+		return "studentView.jsp";
 	}
-
 }
