@@ -26,6 +26,9 @@ public class SubjectDAO extends DAO {
 			subject_list.add(subject);
 		}
 
+		st.close();
+		con.close();
+
 		return subject_list;
 
 	}
