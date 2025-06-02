@@ -8,6 +8,7 @@ public class Class implements Serializable {
 	private String id;
 	private List<School> schools = new ArrayList<>();
 	private String name;
+	
 	public String getId() {
 		return id;
 	}
