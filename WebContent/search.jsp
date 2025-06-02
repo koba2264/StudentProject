@@ -21,13 +21,9 @@
   <h2>学生情報一覧検索</h2>
 
   <form action="SearchStudentServlet.action" method="post">
-    <label>学校: <input type="text" name="school"></label><br>
     <label>クラス: <input type="text" name="className"></label><br>
     <label>名前: <input type="text" name="studentName"></label><br>
     <label>学籍番号: <input type="text" name="studentId"></label><br>
-    <label>入学年度:
-  <input type="number" name="enrollmentYear" min="2020" max="2100"></label><br>
-    <input type="submit" value="検索">
   </form>
 
   <br>
@@ -51,11 +47,9 @@
         for (java.util.Map<String, String> student : results) {
       %>
         <tr>
-          <td><%= student.get("school") %></td>
           <td><%= student.get("className") %></td>
           <td><%= student.get("studentName") %></td>
           <td><%= student.get("studentId") %></td>
-          <td><%= student.get("enrollmentYear") %></td>
         </tr>
       <%
         }

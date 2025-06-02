@@ -5,10 +5,10 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>学生情報管理</title>
+  <title>学生情報 登録フォーム</title>
 </head>
 <body>
-  <h2>学生情報管理</h2>
+  <h2>学生情報 登録フォーム</h2>
 <form action="StudentRegisterServlet" method="post">
   <label>学籍番号: <input type="text" name="studentId" required></label><br>
   <label>名前: <input type="text" name="studentName" required></label><br>
