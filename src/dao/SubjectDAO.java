@@ -46,6 +46,6 @@ public class SubjectDAO extends DAO {
 		}
 
 		return subject_list;
-
 	}
+
 }
