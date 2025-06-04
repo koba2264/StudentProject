@@ -1,8 +1,14 @@
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.MyClass;
+import bean.Student;
+import dao.MyClassDAO;
+import dao.StudentDAO;
 import tool.Action;
 
 /**
@@ -11,7 +17,13 @@ import tool.Action;
 public class StudentViewAction extends Action {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
+		StudentDAO studao = new StudentDAO();
+		MyClassDAO clsdao = new MyClassDAO();
+
+		List<Student> students = studao.search("","","");
+		List<MyClass> classes = clsdao.allSearch();
+		request.setAttribute("students", students);
+		request.setAttribute("classes", classes);
 		return "studentView.jsp";
 	}
 }
