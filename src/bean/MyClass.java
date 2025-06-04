@@ -9,17 +9,17 @@ import java.util.List;
  * @author s_kobayashi
  *
  */
-public class Class implements Serializable {
+public class MyClass implements Serializable {
 	// クラスID
 	private String id;
 	// 学校情報
 	private School school;
 	// クラス名
 	private String name;
-
 	// 受講科目
 	private List<Subject> subjects = new ArrayList<>();
 
+	// ゲッター
 	public String getId() {
 		return id;
 	}
@@ -43,7 +43,10 @@ public class Class implements Serializable {
 	public void setSchool(School school) {
 		this.school = school;
 	}
-	public void setSubjects(Subject subject) {
+	public void setSubjects(List<Subject> subjects) {
+		this.subjects = subjects;
+	}
+	public void setSubject(Subject subject) {
 		this.subjects.add(subject);
 	}
 }
