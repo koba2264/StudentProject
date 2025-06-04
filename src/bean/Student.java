@@ -1,6 +1,8 @@
 package bean;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServlet;
@@ -24,7 +26,7 @@ public class Student extends HttpServlet {
 	//	在学フラグ
 	private boolean isAttend;
 	//	得点情報<key: subjectId, value: 得点情報>
-	private Map<String, Score> scores = new HashMap<>();
+	private Map<String, List<Score>> scores = new HashMap<>();
 
 	//ゲッター
 	public String getId(){
@@ -46,7 +48,7 @@ public class Student extends HttpServlet {
 	public boolean getIsAttend() {
 		return isAttend;
 	}
-	public Map<String, Score> getScores() {
+	public Map<String, List<Score>> getScores() {
 		return scores;
 	}
 
@@ -67,9 +69,19 @@ public class Student extends HttpServlet {
 		this.isAttend = isAttend;
 	}
 	public void setScores(Score score) {
-		this.scores.put(score.getSubject().getId(), score);
+		List<Score> tmp = this.scores.get(score.getSubject().getId());
+		if (tmp.size() < 2) {
+			tmp.add(score);
+			this.scores.put(score.getSubject().getId(), tmp);
+		}
+	}
+	public void setMap(List<Subject> subjects) {
+		for (Subject subject : subjects) {
+			this.scores.put(subject.getId(), new ArrayList<Score>());
+		}
 	}
 	public void setMyClass(MyClass myClass) {
 		this.myClass = myClass;
+		this.setMap(this.myClass.getSubjects());
 	}
 }
