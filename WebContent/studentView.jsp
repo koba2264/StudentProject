@@ -7,6 +7,7 @@
 <head>
   <meta charset="UTF-8">
   <title>学生情報検索</title>
+</head>
 <body>
   <h2>学生情報一覧検索</h2>
 
@@ -16,7 +17,7 @@
       <label>クラス:
         <select name="classId">
 		<c:forEach var="class" items="${ classes }">
-			<option value="${ class.id }">${ class.name }</option>
+			<option value="${class.id }">d</option>
 		</c:forEach>
         </select>
       </label><br>
