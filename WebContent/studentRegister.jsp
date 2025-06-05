@@ -25,7 +25,7 @@
   <label>入学年度: <input type="number" name="enrollmentYear" min="1000" max="9999" required></label><br><br>
   <input type="submit" value="登録">
 </form>
- <form action="mainMenu.jsp" method="get">
+ <form action="Student.action" method="get">
 	<input type="submit" value="戻る">
  </form>
 

@@ -4,13 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>科目情報管理</title>
 </head>
 <body>
 	  <h2>科目情報管理</h2>
   <ul>
     <li><a href="SubjectRegister.action">科目情報の登録</a></li>
-    <li><a href="search.jsp">科目情報の一覧表示</a></li>
+    <li><a href="SubjectView.action">科目情報の一覧表示</a></li>
   </ul>
+     <form action="mainMenu.jsp" method="get">
+    <input type="submit" value="戻る">
+  </form>
 </body>
 </html>
