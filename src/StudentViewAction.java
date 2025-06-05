@@ -20,7 +20,12 @@ public class StudentViewAction extends Action {
 		StudentDAO studao = new StudentDAO();
 		MyClassDAO clsdao = new MyClassDAO();
 
-		List<Student> students = studao.search("","","");
+		String Id = request.getParameter("studentId");
+		String name = request.getParameter("studentName");
+		String classId = request.getParameter("classId");
+
+
+		List<Student> students = studao.search(Id == null ? "" : Id,name == null ? "" : name,classId == null ? "" : classId);
 		List<MyClass> classes = clsdao.allSearch();
 		request.setAttribute("students", students);
 		request.setAttribute("classes", classes);

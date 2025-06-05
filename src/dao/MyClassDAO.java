@@ -13,10 +13,8 @@ import bean.Subject;
 public class MyClassDAO extends DAO {
 	public List<MyClass> allSearch() throws Exception {
 		List<MyClass> myClasses = new ArrayList<>();
-		System.out.println(11);
 		Connection con = getConnection();
 		PreparedStatement ps = con.prepareStatement("SELECT CLASS.ID AS CLS_ID, CLASS.NAME AS CLS_NAME, SCHOOL.ID AS SCH_ID, SCHOOL.NAME AS SCH_NAME FROM CLASS INNER JOIN SCHOOL ON CLASS.SCHOOL_ID = SCHOOL.ID;");
-		System.out.println(10);
 		ResultSet rs = ps.executeQuery();
 
 		SubjectDAO subdao = new SubjectDAO();

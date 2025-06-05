@@ -7,16 +7,18 @@
 <head>
   <meta charset="UTF-8">
   <title>学生情報検索</title>
+</head>
 <body>
   <h2>学生情報一覧検索</h2>
 
   <!-- 検索フォーム -->
   <div class="form-section">
-    <form action="SearchStudentServlet" method="post">
+    <form action="StudentView.action" method="post">
       <label>クラス:
         <select name="classId">
-		<c:forEach var="class" items="${ classes }">
-			<option value="${ class.id }">${ class.name }</option>
+        	<option value="">選択しない</option>
+		<c:forEach var="myClass" items="${ classes }">
+			<option value="${ myClass.id }">${ myClass.name }</option>
 		</c:forEach>
         </select>
       </label><br>
