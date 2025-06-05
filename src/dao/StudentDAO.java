@@ -63,8 +63,8 @@ public class StudentDAO extends DAO {
 			List<Subject> subjects = subDao.ClassSearch(myClass.getId());
 			myClass.setSubjects(subjects);
 			student.setMyClass(myClass);
-			
-			
+
+
 
 			students.add(student);
 		}

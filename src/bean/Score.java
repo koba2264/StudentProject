@@ -38,7 +38,7 @@ public class Score implements java.io.Serializable {
 	public void setStudentId(String studentId){
 		this.studentId = studentId;
 	}
-	public void setSubjectId(Subject subject){
+	public void setSubject(Subject subject){
 		this.subject = subject;
 	}
 	public void setClassId(String classId){
