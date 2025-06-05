@@ -13,6 +13,7 @@ import bean.Score;
 import bean.Student;
 import bean.Subject;
 
+// 学生情報の保存
 public class StudentDAO extends DAO {
 	public boolean insert(Student student) throws Exception {
 		boolean result = false;
@@ -28,6 +29,8 @@ public class StudentDAO extends DAO {
 		if (line == 1) {
 			result = true;
 		}
+		ps.close();
+		con.close();
 
 		return result;
 	}
@@ -37,10 +40,10 @@ public class StudentDAO extends DAO {
 		List<Student> students = new ArrayList<>();
 		Connection con = getConnection();
 		PreparedStatement ps = con.prepareStatement(
-				"SELECT STU.ID AS STU_ID, STU.NAME AS STU_NAME, ENT_YEAR, IS_ATTEND,GEN.ID AS GEN_ID, GEN.NAME AS GEN_NAME, CLS_NAME, CLS_ID, SCH_NAME, SCH_ID FROM STUDENTS AS STU INNER JOIN GENDER AS GEN ON STU.GENDER_ID = GEN.ID INNER JOIN (SELECT CLASS.ID AS CLS_ID, CLASS.NAME AS CLS_NAME, SCHOOL.ID AS SCH_ID, SCHOOL.NAME AS SCH_NAME  FROM CLASS INNER JOIN SCHOOL ON CLASS.SCHOOL_ID  = SCHOOL.ID) AS CLS ON CLS.CLS_ID = STU.CLASS_ID WHERE STU.ID LIKE '%?%' AND STU.NAME LIKE '%?%' AND CLS_ID LIKE '%?%';");
-		ps.setString(1, id);
-		ps.setString(2, name);
-		ps.setString(3, classId);
+				"SELECT STU.ID AS STU_ID, STU.NAME AS STU_NAME, ENT_YEAR, IS_ATTEND,GEN.ID AS GEN_ID, GEN.NAME AS GEN_NAME, CLS_NAME, CLS_ID, SCH_NAME, SCH_ID FROM STUDENTS AS STU INNER JOIN GENDER AS GEN ON STU.GENDER_ID = GEN.ID INNER JOIN (SELECT CLASS.ID AS CLS_ID, CLASS.NAME AS CLS_NAME, SCHOOL.ID AS SCH_ID, SCHOOL.NAME AS SCH_NAME  FROM CLASS INNER JOIN SCHOOL ON CLASS.SCHOOL_ID  = SCHOOL.ID) AS CLS ON CLS.CLS_ID = STU.CLASS_ID WHERE STU.ID LIKE ? AND STU.NAME LIKE ? AND CLS_ID LIKE ?;");
+		ps.setString(1, "%" + id + "%");
+		ps.setString(2, "%" + name + "%");
+		ps.setString(3, "%" + classId + "%");
 		ResultSet rs = ps.executeQuery();
 		SubjectDAO subDao = new SubjectDAO();
 		ScoreDAO scoDAO = new ScoreDAO();
@@ -65,15 +68,15 @@ public class StudentDAO extends DAO {
 			List<Subject> subjects = subDao.ClassSearch(myClass.getId());
 			myClass.setSubjects(subjects);
 			student.setMyClass(myClass);
+
 			List<Score> scores = scoDAO.search(rs.getString("CLS_ID"));
 			for(Score score : scores){
 				student.setScores(score);
 			}
-
-
-
 			students.add(student);
 		}
+		ps.close();
+		con.close();
 
 		return students;
 	}

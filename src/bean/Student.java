@@ -32,9 +32,7 @@ public class Student extends HttpServlet {
 	public String getId(){
 		return this.id;
 	}
-	public String getName(){
-		return this.name;
-	}
+
 	public Gender getGender(){
 		return this.gender;
 	}
@@ -56,9 +54,7 @@ public class Student extends HttpServlet {
 	public void setId(String id){
 		this.id = id;
 	}
-	public void setName(String name){
-		this.name = name;
-	}
+
 	public void setGender(Gender gender){
 		this.gender = gender;
 	}
@@ -83,5 +79,13 @@ public class Student extends HttpServlet {
 	public void setMyClass(MyClass myClass) {
 		this.myClass = myClass;
 		this.setMap(this.myClass.getSubjects());
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }
