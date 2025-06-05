@@ -58,5 +58,8 @@
 	    <p>該当する学生情報は見つかりませんでした。</p>
   	</c:otherwise>
   </c:choose>
+      <form action="Student.action" method="get">
+    <input type="submit" value="戻る">
+  </form>
 </body>
 </html>

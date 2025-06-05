@@ -8,16 +8,18 @@ import java.util.List;
 
 import bean.MyClass;
 import bean.School;
-import bean.Subject;
 
+import bean.Subject;
 public class MyClassDAO extends DAO {
 	public List<MyClass> allSearch() throws Exception {
 		List<MyClass> myClasses = new ArrayList<>();
 		Connection con = getConnection();
+
 		PreparedStatement ps = con.prepareStatement("SELECT CLASS.ID AS CLS_ID, CLASS.NAME AS CLS_NAME, SCHOOL.ID AS SCH_ID, SCHOOL.NAME AS SCH_NAME FROM CLASS INNER JOIN SCHOOL ON CLASS.SCHOOL_ID = SCHOOL.ID;");
 		ResultSet rs = ps.executeQuery();
 
 		SubjectDAO subdao = new SubjectDAO();
+
 		while(rs.next()) {
 			MyClass myClass = new MyClass();
 			School school = new School();
