@@ -7,9 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<<<<<<< HEAD
-
-=======
 	  <h2>科目情報管理</h2>
   <ul>
     <li><a href="SubjectRegister.action">科目情報の登録</a></li>
