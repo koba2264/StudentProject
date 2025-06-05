@@ -13,11 +13,12 @@
 
   <!-- 検索フォーム -->
   <div class="form-section">
-    <form action="SearchStudentServlet" method="post">
+    <form action="StudentView.action" method="post">
       <label>クラス:
         <select name="classId">
-		<c:forEach var="class" items="${ classes }">
-			<option value="${class.id }">d</option>
+        	<option value="">選択しない</option>
+		<c:forEach var="myClass" items="${ classes }">
+			<option value="${ myClass.id }">${ myClass.name }</option>
 		</c:forEach>
         </select>
       </label><br>
