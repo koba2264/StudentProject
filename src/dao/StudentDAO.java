@@ -12,8 +12,8 @@ import bean.School;
 import bean.Student;
 import bean.Subject;
 
-// 学生情報の保存
 public class StudentDAO extends DAO {
+	// 学生情報の保存
 	public boolean insert(Student student) throws Exception {
 		boolean result = false;
 		Connection con = getConnection();
@@ -31,6 +31,19 @@ public class StudentDAO extends DAO {
 		ps.close();
 		con.close();
 
+		return result;
+	}
+
+//	学生情報の削除
+	public boolean delete(String id) throws Exception {
+		boolean result = false;
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("DELETE FROM STUDENTS WHERE ID = ?;");
+		ps.setString(1, id);
+		int line = ps.executeUpdate();
+		if (line > 0) {
+			result = true;
+		}
 		return result;
 	}
 
