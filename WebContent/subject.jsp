@@ -7,14 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<<<<<<< HEAD
-
-=======
 	  <h2>科目情報管理</h2>
   <ul>
     <li><a href="SubjectRegister.action">科目情報の登録</a></li>
     <li><a href="search.jsp">科目情報の一覧表示</a></li>
   </ul>
->>>>>>> branch 'master' of https://github.com/koba2264/StudentProject.git
 </body>
 </html>
