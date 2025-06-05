@@ -37,6 +37,7 @@
 	        <th>クラス</th>
 	        <th>名前</th>
 	        <th>学籍番号</th>
+	        <th>削除</th>
 	      </tr>
 		<c:forEach var="student" items="${ students }">
 	        <tr>
@@ -51,8 +52,5 @@
 	    <p>該当する学生情報は見つかりませんでした。</p>
   	</c:otherwise>
   </c:choose>
-
-
-
 </body>
 </html>

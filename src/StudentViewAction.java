@@ -20,12 +20,18 @@ public class StudentViewAction extends Action {
 		StudentDAO studao = new StudentDAO();
 		MyClassDAO clsdao = new MyClassDAO();
 
+//		検索条件の取得
+//		学籍番号
 		String Id = request.getParameter("studentId");
+//		名前
 		String name = request.getParameter("studentName");
+//		クラス
 		String classId = request.getParameter("classId");
 
 
-		List<Student> students = studao.search(Id == null ? "" : Id,name == null ? "" : name,classId == null ? "" : classId);
+//		学生情報をDBから取得
+		List<Student> students = studao.search(Id == null ? "" : Id, name == null ? "" : name, classId == null ? "" : classId);
+//		検索画面のドロップダウンで使用するクラスデータを取得
 		List<MyClass> classes = clsdao.allSearch();
 		request.setAttribute("students", students);
 		request.setAttribute("classes", classes);
