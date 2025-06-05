@@ -12,6 +12,7 @@ import bean.School;
 import bean.Student;
 import bean.Subject;
 
+// 学生情報の保存
 public class StudentDAO extends DAO {
 	public boolean insert(Student student) throws Exception {
 		boolean result = false;
