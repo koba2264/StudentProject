@@ -9,6 +9,7 @@ import java.util.List;
 import bean.Gender;
 import bean.MyClass;
 import bean.School;
+import bean.Score;
 import bean.Student;
 import bean.Subject;
 
@@ -42,6 +43,7 @@ public class StudentDAO extends DAO {
 		ps.setString(3, classId);
 		ResultSet rs = ps.executeQuery();
 		SubjectDAO subDao = new SubjectDAO();
+		ScoreDAO scoDAO = new ScoreDAO();
 
 		while(rs.next()) {
 			Student student = new Student();
@@ -63,6 +65,10 @@ public class StudentDAO extends DAO {
 			List<Subject> subjects = subDao.ClassSearch(myClass.getId());
 			myClass.setSubjects(subjects);
 			student.setMyClass(myClass);
+			List<Score> scores = scoDAO.search(rs.getString("CLS_ID"));
+			for(Score score : scores){
+				student.setScores(score);
+			}
 
 
 

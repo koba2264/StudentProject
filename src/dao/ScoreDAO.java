@@ -13,12 +13,13 @@ import bean.Subject;
  * Servlet implementation class ScoreDAO
  */
 public class ScoreDAO extends DAO {
-	public List<Score> search() throws Exception {
+	public List<Score> search(String class_id) throws Exception {
 		List<Score> scores = new ArrayList<>();
 		Score score = null;
 		Subject subject = null;
 		Connection con = getConnection();
-		PreparedStatement st = con.prepareStatement("SELECT STUDENT_ID,SUBJECT_ID,SUBJECT.NAME AS SUBJECT_NAME,COUNT,CLASS_ID,SCORE FROM SCORE INNER JOIN SUBJECT ON SCORE.SUBJECT_ID = SUBJECT.ID;");
+		PreparedStatement st = con.prepareStatement("SELECT STUDENT_ID,SUBJECT_ID,SUBJECT.NAME AS SUBJECT_NAME,COUNT,CLASS_ID,SCORE FROM SCORE INNER JOIN SUBJECT ON SCORE.SUBJECT_ID = SUBJECT.ID WHERE CLASS_ID = ?;");
+		st.setString(1, class_id);
 		ResultSet rs = st.executeQuery();
 
 		while(rs.next()){
