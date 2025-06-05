@@ -15,7 +15,7 @@
   <p>入学年度: ${param.enrollmentYear}</p>
 
   <!-- 登録確定ボタン -->
-  <form action="SubjectRegisterServlet.action" method="post">
+  <form action="" method="post">
     <input type="hidden" name="classId" value="${param.classId}">
     <input type="hidden" name="studentId" value="${param.studentId}">
     <input type="hidden" name="name" value="${param.name}">

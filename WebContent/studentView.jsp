@@ -44,6 +44,12 @@
 	          <td>${ student.myClass.name }</td>
 	          <td>${ student.name }</td>
 	          <td>${ student.id }</td>
+	          <td>
+	          	<form action="StudentDelete.action" method="post">
+	          		<input type="hidden" value="${ student.id }" name="id">
+	          		<input type="submit" value="削除">
+	          	</form>
+	          </td>
 	        </tr>
 		</c:forEach>
 	    </table>
