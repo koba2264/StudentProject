@@ -34,7 +34,31 @@ public class ScoreDAO extends DAO {
 			score.setScore(rs.getInt("SCORE"));
 			scores.add(score);
 		}
+		st.close();
+		con.close();
 		return scores;
+	}
 
+	// 学籍番号から得点の一覧を取得
+	public List<Score> stuSearch(String studentId) throws Exception {
+		List<Score> scores = new ArrayList<>();
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT SUBJECT_ID,COUNT, SCORE FROM SCORE WHERE STUDENT_ID = ?;");
+		ps.setString(1, studentId);
+		ResultSet rs = ps.executeQuery();
+
+		while(rs.next()) {
+			Score score = new Score();
+			Subject subject = new Subject();
+			score.setStudentId(studentId);
+			subject.setId(rs.getString("SUBJECT_ID"));
+			score.setSubject(subject);
+			score.setCount(rs.getInt("COUNT"));
+			score.setScore(rs.getInt("SCORE"));
+		}
+		ps.close();
+		con.close();
+
+		return scores;
 	}
 }

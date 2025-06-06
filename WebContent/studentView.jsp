@@ -45,7 +45,7 @@
 	          <td>${ student.name }</td>
 	          <td>${ student.id }</td>
 	          <td>
-	          	<form action="StudentDelete.action" method="post">
+	          	<form action="StudentDelete.action" method="post" onSubmit="return CheckDelete()">
 	          		<input type="hidden" value="${ student.id }" name="id">
 	          		<input type="submit" value="削除">
 	          	</form>
@@ -58,8 +58,18 @@
 	    <p>該当する学生情報は見つかりませんでした。</p>
   	</c:otherwise>
   </c:choose>
-      <form action="Student.action" method="get">
+  <form action="Student.action" method="get">
     <input type="submit" value="戻る">
   </form>
+  <script>
+    function CheckDelete(){
+        if(confirm('削除しますか？')){
+            return true;
+        }else{
+            alert('キャンセルされました');
+            return false;
+        }
+    }
+	</script>
 </body>
 </html>

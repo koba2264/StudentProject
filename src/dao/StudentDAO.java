@@ -45,6 +45,8 @@ public class StudentDAO extends DAO {
 		if (line > 0) {
 			result = true;
 		}
+		ps.close();
+		con.close();
 		return result;
 	}
 
@@ -82,7 +84,7 @@ public class StudentDAO extends DAO {
 			myClass.setSubjects(subjects);
 			student.setMyClass(myClass);
 
-			List<Score> scores = scoDAO.search(rs.getString("CLS_ID"));
+			List<Score> scores = scoDAO.stuSearch(student.getId());
 			for(Score score : scores){
 				student.setScores(score);
 			}
