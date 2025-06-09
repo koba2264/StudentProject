@@ -51,20 +51,6 @@
       background-color: #00ffff20;
       box-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff;
     }
-
-    p {
-      color: #66ffff;
-      text-align: center;
-    }
-
-    hr {
-      border: 0;
-      height: 1px;
-      background: #00ffff;
-      box-shadow: 0 0 8px #00ffff;
-      margin: 30px auto;
-      width: 80%;
-    }
   </style>
 </head>
 <body>
