@@ -25,7 +25,7 @@
   </form>
 
   <!-- 戻るボタン -->
-  <form action="SubjectRegister.action" method="get">
+  <form action="StudenttRegister.action" method="get">
     <input type="submit" value="戻る">
   </form>
 </body>
