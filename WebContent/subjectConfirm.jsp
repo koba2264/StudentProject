@@ -11,8 +11,8 @@
   <p>科目名: ${param.subjectName}</p>
 
   <!-- 登録確定ボタン -->
-  <form action="SubjectRegisterServlet.action" method="post">
-    <input type="hidden" name="subjectName" value="${param.subjectName}">
+  <form action="SubjectRegister.action" method="post">
+    <input type="hidden" name="name" value="${param.subjectName}">
     <input type="submit" value="登録確定">
   </form>
 

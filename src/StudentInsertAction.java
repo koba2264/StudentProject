@@ -4,9 +4,10 @@ import javax.servlet.http.HttpServletResponse;
 import bean.Gender;
 import bean.MyClass;
 import bean.Student;
+import dao.StudentDAO;
 import tool.Action;
 
-public class StudentConfirmAction extends Action {
+public class StudentInsertAction extends Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -27,8 +28,11 @@ public class StudentConfirmAction extends Action {
 		student.setGender(gender);
 		student.setEnrollmentYear(Integer.parseInt(request.getParameter("enrollmentYear")));
 
+		StudentDAO dao = new StudentDAO();
+		dao.insert(student);
+
 		request.setAttribute("student", student);
-		return "studentConfirm.jsp";
+		return "student_result.jsp";
 	}
 
 }

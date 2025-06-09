@@ -36,4 +36,20 @@ public class MyClassDAO extends DAO {
 		con.close();
 		return myClasses;
 	}
+
+	public List<MyClass> classSearch() throws Exception {
+		List<MyClass> myClasses = new ArrayList<>();
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM CLASS;");
+		ResultSet rs = ps.executeQuery();
+
+		while(rs.next()) {
+			MyClass myClass = new MyClass();
+			myClass.setId(rs.getString("ID"));
+			myClass.setName(rs.getString("NAME"));
+			myClasses.add(myClass);
+		}
+
+		return myClasses;
+	}
 }

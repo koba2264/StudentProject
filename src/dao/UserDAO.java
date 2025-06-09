@@ -10,7 +10,7 @@ import bean.User;
 
 public class UserDAO extends DAO {
 	public User login(String userId,String password) throws Exception {
-		User user = new User();
+		User user = null;
 		School school = new School();
 		Role role = new Role();
 
@@ -22,6 +22,7 @@ public class UserDAO extends DAO {
 		st.setString(2, password);
 		ResultSet rs = st.executeQuery();
 		while (rs.next()) {
+			user = new User();
 			// 学校のbeanに保存
 			school.setId(rs.getString("school_id"));
 			school.setName(rs.getString("school_name"));
