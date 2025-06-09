@@ -17,13 +17,13 @@
         	<option value="131">131</option>
         	<option value="131">231</option>
           <%
-  List<Map<String, String>> classList =
-    (List<Map<String, String>>) request.getAttribute("classList");
+  List<Map<String, String>> scoreList =
+    (List<Map<String, String>>) request.getAttribute("scoreList");
 
-  if (classList != null) {
-    for (Map<String, String> cls : classList) {
+  if (scoreList != null) {
+    for (Map<String, String> score : scoreList) {
 %>
-      <option value="<%= cls.get("name") %>"><%= cls.get("name") %></option>
+      <option value="<%= score.get("myClass") %>"><%= score.get("") %></option>
 <%
     }
   }
@@ -38,9 +38,8 @@
   </div>
 
   <!-- 検索結果 -->
-  <%
-    java.util.List<java.util.Map<String, String>> results =
-        (java.util.List<java.util.Map<String, String>>) request.getAttribute("resultList");
+  <% List<Map<String, String>> results =
+        (List<Map<String, String>>) request.getAttribute("resultList");
 
     if (results != null && !results.isEmpty()) {
   %>
