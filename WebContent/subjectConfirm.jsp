@@ -8,11 +8,13 @@
 <body>
   <h2>入力内容の確認</h2>
 
-  <p>科目名: ${param.subjectName}</p>
+  <p>科目ID: ${ subject.id }</p>
+  <p>科目名: ${ subject.name }</p>
 
   <!-- 登録確定ボタン -->
-  <form action="SubjectRegister.action" method="post">
-    <input type="hidden" name="name" value="${param.subjectName}">
+  <form action="SubjectInsert.action" method="post">
+    <input type="hidden" name="name" value="${ subject.name }">
+    <input type="hidden" name="id" value="${ subject.id }">
     <input type="submit" value="登録確定">
   </form>
 

@@ -8,7 +8,6 @@ import java.util.List;
 
 import bean.MyClass;
 import bean.School;
-
 import bean.Subject;
 public class MyClassDAO extends DAO {
 	public List<MyClass> allSearch() throws Exception {
