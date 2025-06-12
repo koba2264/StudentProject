@@ -1,5 +1,8 @@
 package bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Servlet implementation class User
  */
@@ -14,6 +17,11 @@ public class User implements java.io.Serializable {
 	private School school = new School();
 	// 権限ID
 	private Role role = new Role();
+	// 受け持ちクラス
+	private List<MyClass> classes = new ArrayList<>();
+	// 受け持ち科目
+	private List<Subject> subjects = new ArrayList<>();
+
 
 
 	// ゲッター
@@ -32,6 +40,12 @@ public class User implements java.io.Serializable {
 	public String getPassword(){
 		return this.password;
 	}
+	public List<MyClass> getClasses() {
+		return classes;
+	}
+	public List<Subject> getSubjects() {
+		return subjects;
+	}
 
 
 	// セッター
@@ -49,5 +63,11 @@ public class User implements java.io.Serializable {
 	}
 	public void setPassword(String password){
 		this.password = password;
+	}
+	public void setClasses(List<MyClass> classes) {
+		this.classes = classes;
+	}
+	public void setSubjects(List<Subject> subjects) {
+		this.subjects = subjects;
 	}
 }

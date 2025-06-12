@@ -9,7 +9,7 @@
 <body>
 	<h2>利用者管理</h2>
   	<ul>
-    	<li><a href="">ユーザー登録</a></li>
+    	<li><a href="CreateUser.action">ユーザー登録</a></li>
     	<li><a href="">ユーザー一覧</a></li>
   	</ul>
     <form action="mainMenu.jsp" method="get">

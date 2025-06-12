@@ -51,4 +51,18 @@ public class MyClassDAO extends DAO {
 
 		return myClasses;
 	}
+
+	public List<MyClass> userSearch(String userId) throws Exception {
+		List<MyClass> myClasses = new ArrayList<>();
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT ID, NAME FROM CLASS INNER JOIN CLASS_USER ON CLASS.ID = CLASS_USER.CLASS_ID WHERE USER_ID = ?;");
+		ResultSet rs = ps.executeQuery();
+
+		while(rs.next()) {
+			MyClass myClass = new MyClass();
+			myClass.setId(rs.getString("ID"));
+		}
+
+		return myClasses;
+	}
 }
