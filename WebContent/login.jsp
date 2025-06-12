@@ -5,65 +5,64 @@
   <title>ログイン</title>
   <style>
     body {
-      font-family: "Helvetica Neue", sans-serif;
-      background-color: #f7f7f7;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      font-family: 'Meiryo', sans-serif;
+      background-color: #ffffff;
       margin: 0;
+      padding: 0;
     }
 
     .login-container {
-      background-color: #ffffff;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      width: 300px;
+      width: 320px;
+      margin: 100px auto;
+      border: 2px solid #444;
+      padding: 30px;
+      box-sizing: border-box;
+      background-color: #f9f9f9;
     }
 
     h2 {
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
+      font-size: 20px;
       color: #333;
     }
 
     label {
       display: block;
-      margin-bottom: 6px;
-      color: #555;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #222;
     }
 
     input[type="text"],
     input[type="password"] {
       width: 100%;
       padding: 10px;
-      margin-bottom: 18px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+      border: 2px solid #444;
       box-sizing: border-box;
+      margin-bottom: 20px;
+      font-size: 14px;
     }
 
     input[type="submit"] {
       width: 100%;
       padding: 10px;
-      background-color: #F2C9C9;
       border: none;
-      border-radius: 6px;
+      background-color: #444;
       color: white;
-      font-size: 16px;
+      font-size: 14px;
       cursor: pointer;
-      transition: background-color 0.2s ease-in-out;
     }
 
     input[type="submit"]:hover {
-      background-color: #DCACAC;
+      background-color: #000;
     }
 
     .error-message {
       color: red;
       text-align: center;
-      margin-top: 12px;
+      margin-top: 10px;
+      font-size: 13px;
     }
   </style>
 </head>
