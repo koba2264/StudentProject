@@ -3,12 +3,15 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import bean.Role;
 import bean.School;
 import bean.User;
 
 public class UserDAO extends DAO {
+//	ログイン処理
 	public User login(String userId,String password) throws Exception {
 		User user = null;
 		School school = new School();
@@ -43,4 +46,60 @@ public class UserDAO extends DAO {
 		return user;
 	}
 
+//	サインアップ処理
+	public boolean signup(User user) throws Exception {
+		boolean result = false;
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("INSERT INTO USERS(ID,SCHOOL_ID,ROLE_ID,NAME,PASSWORD) VALUES (?,?,?,?,?);");
+		ps.setString(1, user.getUserId());
+		ps.setString(2, user.getSchool().getId());
+		ps.setString(3, user.getRole().getId());
+		ps.setString(4, user.getStudentName());
+		ps.setString(5, user.getPassword());
+
+		if (ps.executeUpdate() > 0) {
+			result = true;
+		}
+
+		ps.close();
+		con.close();
+
+		return result;
+	}
+
+//	idが存在するか確認
+	public boolean checkId(String id) throws Exception {
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM USERS WHERE ID = ?;");
+		ps.setString(1, id);
+		ResultSet rs = ps.executeQuery();
+
+		return rs.next();
+	}
+
+	public List<User> search() throws Exception {
+		List<User> users = new ArrayList<>();
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT USERS.ID AS USER_ID, USERS.NAME AS USER_NAME, SCH.ID AS SCH_ID, SCH.NAME AS SCH_NAME, ROLE.ID AS ROLE_ID, ROLE.NAME AS ROLE_NAME, ROLE.PERM AS ROLE_PERM  FROM USERS INNER JOIN SCHOOL AS SCH ON USERS.SCHOOL_ID = SCH.ID INNER JOIN ROLE ON USERS.ROLE_ID = ROLE.ID;");
+		ResultSet rs = ps.executeQuery();
+
+		while (rs.next()) {
+			User user = new User();
+			user.setUserId(rs.getString("USER_ID"));
+			user.setStudentName(rs.getString("USER_NAME"));
+			School school = new School();
+			school.setId(rs.getString("SCH_ID"));
+			school.setName(rs.getString("SCH_NAME"));
+			user.setSchool(school);
+			Role role = new Role();
+			role.setId(rs.getString("ROLE_ID"));
+			role.setRoleName(rs.getString("ROLE_NAME"));
+			role.setPermission(rs.getInt("ROLE_PERM"));
+			user.setRole(role);
+
+			users.add(user);
+		}
+
+		return users;
+	}
 }
