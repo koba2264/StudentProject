@@ -49,9 +49,13 @@ public class MyClassDAO extends DAO {
 			myClasses.add(myClass);
 		}
 
+		ps.close();
+		con.close();
+
 		return myClasses;
 	}
 
+//	受け持ちクラスの取得
 	public List<MyClass> userSearch(String userId) throws Exception {
 		List<MyClass> myClasses = new ArrayList<>();
 		Connection con = getConnection();
@@ -61,7 +65,11 @@ public class MyClassDAO extends DAO {
 		while(rs.next()) {
 			MyClass myClass = new MyClass();
 			myClass.setId(rs.getString("ID"));
+			myClass.setName(rs.getString("NAME"));
 		}
+
+		ps.close();
+		con.close();
 
 		return myClasses;
 	}

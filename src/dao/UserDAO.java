@@ -6,8 +6,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import bean.MyClass;
 import bean.Role;
 import bean.School;
+import bean.Subject;
 import bean.User;
 
 public class UserDAO extends DAO {
@@ -77,7 +79,8 @@ public class UserDAO extends DAO {
 		return rs.next();
 	}
 
-	public List<User> search() throws Exception {
+//	ユーザーを全件取得
+	public List<User> all() throws Exception {
 		List<User> users = new ArrayList<>();
 		Connection con = getConnection();
 		PreparedStatement ps = con.prepareStatement("SELECT USERS.ID AS USER_ID, USERS.NAME AS USER_NAME, SCH.ID AS SCH_ID, SCH.NAME AS SCH_NAME, ROLE.ID AS ROLE_ID, ROLE.NAME AS ROLE_NAME, ROLE.PERM AS ROLE_PERM  FROM USERS INNER JOIN SCHOOL AS SCH ON USERS.SCHOOL_ID = SCH.ID INNER JOIN ROLE ON USERS.ROLE_ID = ROLE.ID;");
@@ -96,9 +99,18 @@ public class UserDAO extends DAO {
 			role.setRoleName(rs.getString("ROLE_NAME"));
 			role.setPermission(rs.getInt("ROLE_PERM"));
 			user.setRole(role);
+			MyClassDAO clsDao = new MyClassDAO();
+			List<MyClass> classes =  clsDao.userSearch(user.getUserId());
+			user.setClasses(classes);
+			SubjectDAO subDao = new SubjectDAO();
+			List<Subject> subjects = subDao.userSearch(user.getUserId());
+			user.setSubjects(subjects);
 
 			users.add(user);
 		}
+
+		ps.close();
+		con.close();
 
 		return users;
 	}
