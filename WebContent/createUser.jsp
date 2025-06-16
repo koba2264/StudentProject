@@ -30,5 +30,8 @@
 		</label><br>
 		<input type="submit" value="登録">
 	</form>
+  	<form action="Role.action" method="get">
+    	<input type="submit" value="戻る">
+  	</form>
 </body>
 </html>

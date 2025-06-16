@@ -54,6 +54,27 @@ public class SubjectDAO extends DAO {
 		return subject_list;
 	}
 
+//	受け持ち科目の取得
+	public List<Subject> userSearch(String userId) throws Exception{
+		Subject subject = null;
+		List<Subject> subject_list = new ArrayList<>();
+		Connection con = getConnection();
+		PreparedStatement st = con.prepareStatement("SELECT ID, NAME FROM SUBJECT INNER JOIN SUBJECT_USER ON SUBJECT.ID = SUBJECT_USER.SUBJECT_ID WHERE SUBJECT_USER.USER_ID = ?");
+		st.setString(1, userId);
+		ResultSet rs = st.executeQuery();
+		while(rs.next()){
+			subject = new Subject();
+			subject.setId(rs.getString("ID"));
+			subject.setSubjectName(rs.getString("NAME"));
+			subject_list.add(subject);
+		}
+
+		st.close();
+		con.close();
+
+		return subject_list;
+	}
+
 //	idが使用済みか確認
 	public boolean checkId(String id) throws Exception{
 		boolean result = false;
