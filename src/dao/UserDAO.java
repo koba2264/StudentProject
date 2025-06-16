@@ -182,4 +182,46 @@ public class UserDAO extends DAO {
 
 		return result;
 	}
+
+//	科目を担当している教員の一覧を取得
+	public List<User> subjectSearch(String subjectId) throws Exception {
+		List<User> users = new ArrayList<>();
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT ID, NAME FROM USERS INNER JOIN SUBJECT_USER  ON USERS.ID = SUBJECT_USER .USER_ID WHERE SUBJECT_USER .SUBJECT_ID = ? AND USERS.ROLE_ID = '002';");
+		ps.setString(1, subjectId);
+		ResultSet rs = ps.executeQuery();
+
+		while(rs.next()) {
+			User user = new User();
+			user.setStudentName(rs.getString("NAME"));
+			user.setUserId(rs.getString("ID"));
+			users.add(user);
+		}
+
+		ps.close();
+		con.close();
+
+		return users;
+	}
+
+//	役職別にユーザーの一覧を取得
+	public List<User> roleAll(String roleId) throws Exception {
+		List<User> users = new ArrayList<>();
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT NAME, ID FROM USERS WHERE ROLE_ID = ?;");
+		ps.setString(1, roleId);
+		ResultSet rs = ps.executeQuery();
+
+		while(rs.next()) {
+			User user = new User();
+			user.setStudentName(rs.getString("NAME"));
+			user.setUserId(rs.getString("ID"));
+			users.add(user);
+		}
+
+		ps.close();
+		con.close();
+
+		return users;
+	}
 }

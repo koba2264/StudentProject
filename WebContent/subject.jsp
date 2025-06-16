@@ -77,6 +77,7 @@
     <ul>
       <li><a href="SubjectRegister.action">科目情報の登録</a></li>
       <li><a href="SubjectView.action">科目情報の一覧表示</a></li>
+      <li><a href="SubjectTeacherView.action">担当教員の一覧表示</a></li>
     </ul>
     <form action="mainMenu.jsp" method="get">
       <input type="submit" value="戻る">
