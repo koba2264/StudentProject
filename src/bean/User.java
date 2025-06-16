@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Servlet implementation class User
  */
-public class User implements java.io.Serializable {
+public class User implements java.io.Serializable, Comparable<User> {
 	// 利用者ID
 	private String userId;
 	// 名前
@@ -69,5 +69,15 @@ public class User implements java.io.Serializable {
 	}
 	public void setSubjects(List<Subject> subjects) {
 		this.subjects = subjects;
+	}
+
+//	自然順序付けようのメソッド
+	@Override
+	public int compareTo(User o) {
+		int result = this.school.getId().compareTo(o.getSchool().getId());
+		if (result == 0) {
+			result = this.userId.compareTo(o.getUserId());
+		}
+		return result;
 	}
 }

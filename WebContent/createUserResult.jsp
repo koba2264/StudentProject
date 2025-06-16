@@ -13,7 +13,7 @@
   <p>名前: ${ user.studentName }</p>
   <p>役職: ${ user.role.roleName }</p>
   <p>所属学校: ${ user.school.name }</p>
-   <form action="User.action" method="get">
+   <form action="Role.action" method="get">
     <input type="submit" value="戻る">
   </form>
 </body>

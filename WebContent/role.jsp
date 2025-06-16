@@ -72,12 +72,11 @@
   </style>
 </head>
 <body>
-  <div class="user-container">
-    <h2>利用者管理</h2>
-    <ul>
-      <li><a href="CreateUser.action">ユーザー登録</a></li>
-      <li><a href="">ユーザー一覧</a></li>
-    </ul>
+	<h2>利用者管理</h2>
+  	<ul>
+    	<li><a href="CreateUser.action">ユーザー登録</a></li>
+    	<li><a href="UserView.action">ユーザー一覧</a></li>
+  	</ul>
     <form action="mainMenu.jsp" method="get">
       <input type="submit" value="戻る">
     </form>
