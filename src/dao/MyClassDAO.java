@@ -60,6 +60,7 @@ public class MyClassDAO extends DAO {
 		List<MyClass> myClasses = new ArrayList<>();
 		Connection con = getConnection();
 		PreparedStatement ps = con.prepareStatement("SELECT ID, NAME FROM CLASS INNER JOIN CLASS_USER ON CLASS.ID = CLASS_USER.CLASS_ID WHERE USER_ID = ?;");
+		ps.setString(1, userId);
 		ResultSet rs = ps.executeQuery();
 
 		while(rs.next()) {

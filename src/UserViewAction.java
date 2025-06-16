@@ -16,7 +16,7 @@ public class UserViewAction extends Action {
 		List<User> users = dao.all();
 		Collections.sort(users);
 		request.setAttribute("users", users);
-		return null;
+		return "userView.jsp";
 	}
 
 }
