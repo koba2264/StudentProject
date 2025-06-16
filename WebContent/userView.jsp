@@ -9,6 +9,7 @@
 </head>
 <body>
 	<h2>ユーザー一覧</h2>
+	<p style="color:red;">${ message }</p>
 	<table>
 		<tr>
 			<th>ID</th>

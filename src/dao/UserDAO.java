@@ -48,6 +48,38 @@ public class UserDAO extends DAO {
 		return user;
 	}
 
+//	ユーザー取得
+	public User search(String userId) throws Exception {
+		User user = null;
+		School school = new School();
+		Role role = new Role();
+
+		Connection con = getConnection();
+
+		PreparedStatement st = con.prepareStatement(
+				"SELECT USERS.ID AS USERS_ID,SCHOOL_ID,SCHOOL.NAME AS  SCHOOL_NAME,ROLE_ID,ROLE.NAME AS ROLE_NAME,USERS.NAME AS USERS_NAME FROM USERS INNER JOIN SCHOOL ON USERS.SCHOOL_ID =  SCHOOL.ID INNER JOIN ROLE ON USERS.ROLE_ID = ROLE.ID WHERE USERS.ID = ?");
+		st.setString(1, userId);
+		ResultSet rs = st.executeQuery();
+		while (rs.next()) {
+			user = new User();
+			// 学校のbeanに保存
+			school.setId(rs.getString("school_id"));
+			school.setName(rs.getString("school_name"));
+			// 権限のbeanに保存
+			role.setId(rs.getString("role_id"));
+			role.setRoleName(rs.getString("role_name"));
+			// usersのbeanに保存
+			user.setUserId(rs.getString("users_id"));
+			user.setStudentName(rs.getString("users_name"));
+			user.setSchool(school);
+			user.setRole(role);
+		}
+
+		st.close();
+		con.close();
+
+		return user;
+	}
 //	サインアップ処理
 	public boolean signup(User user) throws Exception {
 		boolean result = false;
@@ -113,5 +145,38 @@ public class UserDAO extends DAO {
 		con.close();
 
 		return users;
+	}
+
+//	ユーザーの削除
+	public boolean delete(String id) throws Exception {
+		boolean result = false;
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("DELETE FROM USERS WHERE ID = ?;");
+		ps.setString(1, id);
+		int line = ps.executeUpdate();
+		if (line > 0) {
+			result = true;
+		}
+		ps.close();
+		con.close();
+		return result;
+	}
+
+//	ユーザー編集
+	public boolean update(User user) throws Exception {
+		boolean result = false;
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("UPDATE USERS SET SCHOOL_ID  = ?, ROLE_ID  = ?, NAME = ?, UPDATE_AT = CURRENT_DATE WHERE ID = ?;");
+		ps.setString(1, user.getSchool().getId());
+		ps.setString(2, user.getRole().getId());
+		ps.setString(3, user.getStudentName());
+		ps.setString(4, user.getUserId());
+
+		int line = ps.executeUpdate();
+		if (line > 0) {
+			result = true;
+		}
+
+		return result;
 	}
 }
