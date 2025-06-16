@@ -72,6 +72,7 @@
   </style>
 </head>
 <body>
+	<div class="user-container">
 	<h2>利用者管理</h2>
   	<ul>
     	<li><a href="CreateUser.action">ユーザー登録</a></li>
