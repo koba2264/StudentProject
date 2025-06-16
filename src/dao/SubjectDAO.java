@@ -167,7 +167,14 @@ public class SubjectDAO extends DAO {
 		con.close();
 
 		return result;
+	}
 
-
+//	担当教員の削除
+	public void deleteUser(String userId) throws Exception {
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("DELETE FROM SUBJECT_USER WHERE USER_ID = ?;");
+		ps.setString(1, userId);
+		ps.close();
+		con.close();
 	}
 }

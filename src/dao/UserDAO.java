@@ -177,6 +177,9 @@ public class UserDAO extends DAO {
 			result = true;
 		}
 
+		ps.close();
+		con.close();
+
 		return result;
 	}
 }

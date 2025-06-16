@@ -74,4 +74,16 @@ public class MyClassDAO extends DAO {
 
 		return myClasses;
 	}
+
+	public void deleteUser(String userId) throws Exception {
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("DELETE FROM CLASS_USER WHERE USER_ID = ?;");
+		ps.setString(1, userId);
+
+		ps.executeUpdate();
+		ps.close();
+		con.close();
+
+	}
 }
+

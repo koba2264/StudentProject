@@ -11,6 +11,14 @@
 	<h2>ユーザー編集画面</h2>
 	<p style="color:red;">${ message }</p>
 	<form action="UpdateUser.action">
+		<c:choose>
+			<c:when test='${ role.id == "002" }'>
+				<input type="hidden" name="teacher" value="True">
+			</c:when>
+			<c:otherwise>
+				<input type="hidden" name="teacher" value="False">
+			</c:otherwise>
+		</c:choose>
 		<input type="hidden" name="id" value="${ user.userId }">
 		<label>名前: <input type="text" name="name" value="${ user.studentName }" required></label><br>
 		<label>役職:

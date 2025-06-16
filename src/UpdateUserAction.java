@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletResponse;
 import bean.Role;
 import bean.School;
 import bean.User;
+import dao.MyClassDAO;
+import dao.SubjectDAO;
 import dao.UserDAO;
 import tool.Action;
 
@@ -27,6 +29,12 @@ public class UpdateUserAction extends Action {
 
 		UserDAO dao = new UserDAO();
 		if (dao.update(user)) {
+			if (request.getParameter("teacher") == "True" && role.getId() != "002") {
+				SubjectDAO subDao = new SubjectDAO();
+				subDao.deleteUser(user.getUserId());
+				MyClassDAO clsDao = new MyClassDAO();
+				clsDao.deleteUser(user.getUserId());
+			}
 			request.setAttribute("message", "編集に成功しました");
 		} else {
 			request.setAttribute("message", "編集に失敗しました");
