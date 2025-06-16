@@ -167,7 +167,37 @@ public class SubjectDAO extends DAO {
 		con.close();
 
 		return result;
-
-
 	}
+
+//	特定の教員の担当科目の削除
+	public void deleteUser(String userId) throws Exception {
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("DELETE FROM SUBJECT_USER WHERE USER_ID = ?;");
+		ps.setString(1, userId);
+		ps.close();
+		con.close();
+	}
+
+//	科目の一覧を取得
+	public List<Subject> all() throws Exception {
+		List<Subject> subjects = new ArrayList<>();
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM SUBJECT;");
+		ResultSet rs = ps.executeQuery();
+
+		while(rs.next()) {
+			Subject subject = new Subject();
+			subject.setId(rs.getString("ID"));
+			subject.setSubjectName(rs.getString("NAME"));
+			UserDAO dao = new UserDAO();
+			subject.setTeachers(dao.subjectSearch(subject.getId()));
+			subjects.add(subject);
+		}
+
+		ps.close();
+		con.close();
+
+		return subjects;
+	}
+
 }
