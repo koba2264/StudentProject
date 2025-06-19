@@ -12,6 +12,6 @@ public class ScoreViewAction extends Action {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
-		return "scoreView.jsp";
+		return "score.jsp";
 	}
 }

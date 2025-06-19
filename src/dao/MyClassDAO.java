@@ -8,7 +8,6 @@ import java.util.List;
 
 import bean.MyClass;
 import bean.School;
-
 import bean.Subject;
 public class MyClassDAO extends DAO {
 	public List<MyClass> allSearch() throws Exception {
@@ -49,6 +48,8 @@ public class MyClassDAO extends DAO {
 			myClass.setName(rs.getString("NAME"));
 			myClasses.add(myClass);
 		}
+		ps.close();
+		con.close();
 
 		return myClasses;
 	}

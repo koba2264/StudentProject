@@ -5,14 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServlet;
-
 /***
  * 学生情報を保存するBean
  * @author s_kobayashi
  *
  */
-public class Student extends HttpServlet {
+public class Student implements java.io.Serializable {
 	// 学籍番号
 	private String id;
 	// 生徒の名前
@@ -66,6 +64,10 @@ public class Student extends HttpServlet {
 	}
 	public void setScores(Score score) {
 		List<Score> tmp = this.scores.get(score.getSubject().getId());
+		if(tmp == null) {
+			tmp = new ArrayList<>();
+			this.scores.put(score.getSubject().getId(), tmp);
+		}
 		if (tmp.size() < 2) {
 			tmp.add(score);
 			this.scores.put(score.getSubject().getId(), tmp);

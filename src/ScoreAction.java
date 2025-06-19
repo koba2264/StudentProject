@@ -1,8 +1,20 @@
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.MyClass;
+import bean.Score;
+import bean.Student;
+import bean.Subject;
+import dao.MyClassDAO;
+import dao.StudentDAO;
+import dao.SubjectDAO;
 import tool.Action;
 
 /**
@@ -13,6 +25,51 @@ public class ScoreAction extends Action {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
+		String class_id = request.getParameter("class_id");
+		if (class_id == null){
+			class_id = "131";
+		}
+		Score null_score = null;
+		StudentDAO stDAO = new StudentDAO();
+		SubjectDAO subDAO = new SubjectDAO();
+		MyClassDAO mcDAO = new MyClassDAO();
+		Map<String, List<List<Score>>> scores = new HashMap<>();
+		List<Subject> subjects = subDAO.ClassSearch(class_id);
+		List<Student> students = stDAO.search("", "", class_id);
+		List<MyClass> myclasses = mcDAO.classSearch();
+		for(Student student : students){
+			List<List<Score>> sco = new ArrayList<>();
+			for(Subject subject : subjects){
+				List<Score> ScoreList = student.getScores().get(subject.getId());
+//				out.println(ScoreList);
+				while (ScoreList.size() < 2) {
+					null_score = new Score();
+					null_score.setSubject(subject);
+					null_score.setScore(0);
+					null_score.setCount(ScoreList.size() + 1);
+					ScoreList.add(null_score);
+				}
+				sco.add(ScoreList);
+			scores.put(student.getId(), sco);
+			}
+		}
+
+		request.setAttribute("students", students);
+		request.setAttribute("subjects", subjects);
+		request.setAttribute("scores", scores);
+		request.setAttribute("myclasses", myclasses);
+
 		return "score.jsp";
+
 	}
 }
+
+//		PrintWriter out = response.getWriter();
+//		String class_id = request.getParameter("class_id");
+//		StudentDAO stDAO = new StudentDAO();
+//		SubjectDAO sjDAO = new SubjectDAO();
+//		List<Student> students = stDAO.search("", "", "231");
+//		List<Subject> subjects = sjDAO.ClassSearch("231");
+//
+//		request.setAttribute("subjects", subjects);
+//		request.setAttribute("students", students);
