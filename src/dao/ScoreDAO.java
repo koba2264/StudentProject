@@ -26,7 +26,7 @@ public class ScoreDAO extends DAO {
 			score = new Score();
 			subject = new Subject();
 			subject.setId(rs.getString("SUBJECT_ID"));
-			subject.setSubjectName("SUBJECT_NAME");
+			subject.setName("SUBJECT_NAME");
 			score.setStudentId(rs.getString("STUDENT_ID"));
 			score.setSubject(subject);
 			score.setCount(rs.getInt("COUNT"));
@@ -43,7 +43,7 @@ public class ScoreDAO extends DAO {
 	public List<Score> stuSearch(String studentId) throws Exception {
 		List<Score> scores = new ArrayList<>();
 		Connection con = getConnection();
-		PreparedStatement ps = con.prepareStatement("SELECT SUBJECT_ID,COUNT, SCORE FROM SCORE WHERE STUDENT_ID = ?;");
+		PreparedStatement ps = con.prepareStatement("SELECT SUBJECT_ID,COUNT,SCORE FROM SCORE WHERE STUDENT_ID = ? order by count;");
 		ps.setString(1, studentId);
 		ResultSet rs = ps.executeQuery();
 
@@ -55,6 +55,7 @@ public class ScoreDAO extends DAO {
 			score.setSubject(subject);
 			score.setCount(rs.getInt("COUNT"));
 			score.setScore(rs.getInt("SCORE"));
+			scores.add(score);
 		}
 		ps.close();
 		con.close();

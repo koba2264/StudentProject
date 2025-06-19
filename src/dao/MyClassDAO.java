@@ -48,6 +48,8 @@ public class MyClassDAO extends DAO {
 			myClass.setName(rs.getString("NAME"));
 			myClasses.add(myClass);
 		}
+		ps.close();
+		con.close();
 
 		ps.close();
 		con.close();

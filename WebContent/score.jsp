@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<%@ page import="java.util.*"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,11 +25,11 @@
 	align-items: center;
 	gap: 8px;
 	}
-	
+
 	.score-box div {
 		flex: 1;
 	}
-	
+
 	.score-box .divider {
 		width: 1px;
 		background-color: #aaa;
@@ -39,50 +40,73 @@
 </style>
 </head>
 <body>
-	<table>
-		<tr>
-			<th>名前</th>
-			<th>db</th>
-			<th>java</th>
-			<th>python</th>
-			<th>html</th>
-			<th>aws</th>
-		</tr>
-		<tr>
-			<td>俺</td>
-			<td><div class="score-box"><div>13</div><div class="divider"></div><div>100</div></div></td>
-			<td><div class="score-box"><div>13</div><div class="divider"></div><div>100</div></div></td>
-			<td><div class="score-box"><div>13</div><div class="divider"></div><div>100</div></div></td>
-			<td><div class="score-box"><div>13</div><div class="divider"></div><div>100</div></div></td>
-			<td><div class="score-box"><div>13</div><div class="divider"></div><div>100</div></div></td>
-		</tr>
-		<tr>
-			<td>お前</td>
-			<td><div class="score-box"><div>13</div><div class="divider"></div><div>100</div></div></td>
-			<td><div class="score-box"><div>13</div><div class="divider"></div><div>100</div></div></td>
-			<td><div class="score-box"><div>13</div><div class="divider"></div><div>100</div></div></td>
-			<td><div class="score-box"><div>13</div><div class="divider"></div><div>100</div></div></td>
-			<td><div class="score-box"><div>13</div><div class="divider"></div><div>100</div></div></td>
-		</tr>
-		<tr>
-			<td>君</td>
-			<td><div class="score-box"><div>13</div><div class="divider"></div><div>100</div></div></td>
-			<td><div class="score-box"><div>13</div><div class="divider"></div><div>100</div></div></td>
-			<td><div class="score-box"><div>13</div><div class="divider"></div><div>100</div></div></td>
-			<td><div class="score-box"><div>13</div><div class="divider"></div><div>100</div></div></td>
-			<td><div class="score-box"><div>13</div><div class="divider"></div><div>100</div></div></td>
-		</tr>
-		<tr>
-			<td>あなた</td>
-			<td><div class="score-box"><div>13</div><div class="divider"></div><div>100</div></div></td>
-			<td><div class="score-box"><div>13</div><div class="divider"></div><div>100</div></div></td>
-			<td><div class="score-box"><div>13</div><div class="divider"></div><div>100</div></div></td>
-			<td><div class="score-box"><div>13</div><div class="divider"></div><div>100</div></div></td>
-			<td><div class="score-box"><div>13</div><div class="divider"></div><div>100</div></div></td>		
-		</tr>
-	</table>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<select name="class" id="select">
+	<c:forEach var="myclass" items="${ myclasses }">
+		<c:choose>
+			<c:when test="${ myclass.id != 000 }">
+				<option value="${ myclass.id }" class="class_id" ${param.class_id == myclass.id ? 'selected' : ''}>${ myclass.name }</option>
+			</c:when>
+		</c:choose>
+	</c:forEach>
+</select>
+			<table>
+				<tr>
+					<th>名前</th>
+					<c:forEach var="subject" items="${ subjects }">
+						<th colspan="2">${ subject.name }</th>
+					</c:forEach>
+				</tr>
+
+				<c:forEach var="student" items="${ students }">
+				<tr>
+					<td>${ student.name }</td>
+					<c:forEach var="scoreList" items="${ scores[student.id] }">
+						<c:forEach var="score" items="${ scoreList }">
+							<c:choose>
+							  <c:when test="${score.score != null}">
+							    <td>${score.score}</td>
+							  </c:when>
+							  <c:otherwise>
+							    <td>-</td>
+							  </c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</c:forEach>
+				</tr>
+				</c:forEach>
+
+
+
+			</table>
+			<br>
 	    <form action="mainMenu.jsp" method="get">
     <input type="submit" value="戻る">
   </form>
+<div id = "result"></div>
+
+<script type="text/javascript">
+const selectElm = document.getElementById("select");
+selectElm.addEventListener('change',function(){
+	const form = document.createElement('form');
+	const request = document.createElement('input');
+
+	form.method = 'POST';
+	form.action = 'Score.action';
+
+	request.type = 'hidden';
+	request.name = 'class_id';
+	request.value = this.value;
+
+
+	form.appendChild(request);
+	document.body.appendChild(form);
+
+	form.submit();
+})
+
+</script>
+
+
 </body>
 </html>

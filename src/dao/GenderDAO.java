@@ -22,6 +22,8 @@ public class GenderDAO extends DAO {
 			gender.setName(rs.getString("NAME"));
 			genders.add(gender);
 		}
+		ps.close();
+		con.close();
 
 		return genders;
 	}

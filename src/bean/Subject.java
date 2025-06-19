@@ -30,7 +30,7 @@ public class Subject implements java.io.Serializable {
 	public void setId(String Id){
 		this.id = Id;
 	}
-	public void setSubjectName(String name){
+	public void setName(String name){
 		this.name = name;
 	}
 	public List<User> getTeachers() {

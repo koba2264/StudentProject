@@ -22,7 +22,7 @@ public class SubjectDAO extends DAO {
 		while(rs.next()){
 			subject = new Subject();
 			subject.setId(rs.getString("id"));
-			subject.setSubjectName(rs.getString("name"));
+			subject.setName(rs.getString("name"));
 			subject_list.add(subject);
 		}
 
@@ -43,8 +43,8 @@ public class SubjectDAO extends DAO {
 		ResultSet rs = st.executeQuery();
 		while(rs.next()){
 			subject = new Subject();
-			subject.setId(rs.getString("id"));
-			subject.setSubjectName(rs.getString("name"));
+			subject.setId(rs.getString("SUB_ID"));
+			subject.setName(rs.getString("SUB_NAME"));
 			subject_list.add(subject);
 		}
 
