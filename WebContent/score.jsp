@@ -64,7 +64,7 @@
 					<c:forEach var="scoreList" items="${ scores[student.id] }">
 						<c:forEach var="score" items="${ scoreList }">
 							<c:choose>
-							  <c:when test="${score.score != 0}">
+							  <c:when test="${score.score != null}">
 							    <td>${score.score}</td>
 							  </c:when>
 							  <c:otherwise>
