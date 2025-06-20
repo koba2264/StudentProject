@@ -1,9 +1,9 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>登録確認画面</title>
+  <title>ユーザー登録</title>
   <style>
     body {
       font-family: 'Meiryo', sans-serif;
@@ -12,7 +12,7 @@
       padding: 0;
     }
 
-    .confirm-container {
+    .complete-container {
       width: 500px;
       margin: 80px auto;
       padding: 30px;
@@ -36,7 +36,7 @@
 
     form {
       text-align: center;
-      margin-top: 15px;
+      margin-top: 20px;
     }
 
     input[type="submit"] {
@@ -46,7 +46,6 @@
       border: none;
       font-size: 14px;
       cursor: pointer;
-      margin: 5px;
     }
 
     input[type="submit"]:hover {
@@ -55,21 +54,15 @@
   </style>
 </head>
 <body>
-  <div class="confirm-container">
-    <h2>入力内容の確認</h2>
+  <div class="complete-container">
+    <h2>ユーザー情報 登録完了</h2>
 
-    <p>科目ID: ${ subject.id }</p>
-    <p>科目名: ${ subject.name }</p>
+    <p>ユーザーID: ${ user.userId }</p>
+    <p>名前: ${ user.studentName }</p>
+    <p>役職: ${ user.role.roleName }</p>
+    <p>所属学校: ${ user.school.name }</p>
 
-    <!-- 登録確定ボタン -->
-    <form action="SubjectInsert.action" method="post">
-      <input type="hidden" name="name" value="${ subject.name }">
-      <input type="hidden" name="id" value="${ subject.id }">
-      <input type="submit" value="登録確定">
-    </form>
-
-    <!-- 戻るボタン -->
-    <form action="SubjectRegister.action" method="get">
+    <form action="Role.action" method="get">
       <input type="submit" value="戻る">
     </form>
   </div>

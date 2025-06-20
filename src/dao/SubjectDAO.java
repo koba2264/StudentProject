@@ -54,4 +54,150 @@ public class SubjectDAO extends DAO {
 		return subject_list;
 	}
 
+//	受け持ち科目の取得
+	public List<Subject> userSearch(String userId) throws Exception{
+		Subject subject = null;
+		List<Subject> subject_list = new ArrayList<>();
+		Connection con = getConnection();
+		PreparedStatement st = con.prepareStatement("SELECT ID, NAME FROM SUBJECT INNER JOIN SUBJECT_USER ON SUBJECT.ID = SUBJECT_USER.SUBJECT_ID WHERE SUBJECT_USER.USER_ID = ?");
+		st.setString(1, userId);
+		ResultSet rs = st.executeQuery();
+		while(rs.next()){
+			subject = new Subject();
+			subject.setId(rs.getString("ID"));
+			subject.setSubjectName(rs.getString("NAME"));
+			subject_list.add(subject);
+		}
+
+		st.close();
+		con.close();
+
+		return subject_list;
+	}
+
+//	idが使用済みか確認
+	public boolean checkId(String id) throws Exception{
+		boolean result = false;
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM SUBJECT WHERE ID = ?;");
+		ps.setString(1, id);
+		ResultSet rs = ps.executeQuery();
+
+		if (!rs.next()) {
+			result = true;
+		}
+
+		ps.close();
+		con.close();
+
+		return result;
+	}
+
+//	科目の追加
+	public boolean insert(Subject subject) throws Exception {
+		boolean result = false;
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("INSERT INTO SUBJECT VALUES (?,?);");
+		ps.setString(1, subject.getId());
+		ps.setString(2, subject.getName());
+		if (ps.executeUpdate() > 0) {
+			result = true;
+		}
+
+		ps.close();
+		con.close();
+
+		return result;
+	}
+
+//	受講済みの科目Id
+	public List<String> getEnrolledSubjectId(String classId) throws Exception {
+		List<String> subjectIdList = new ArrayList<>();
+		Connection con = getConnection();
+		PreparedStatement st = con.prepareStatement("SELECT SUB.ID AS SUB_ID FROM (SELECT * FROM CLASS_SUBJECT  WHERE CLASS_ID = ?) AS CS INNER JOIN SUBJECT AS SUB ON CS.SUBJECT_ID = SUB.ID;");
+		st.setString(1, classId);
+		ResultSet rs = st.executeQuery();
+		while(rs.next()){
+			subjectIdList.add(rs.getString("SUB_ID"));
+		}
+		st.close();
+		con.close();
+
+		return subjectIdList;
+	}
+
+	public boolean changeEnrolledSubject(String classId, List<String> subList) throws Exception {
+		boolean result = false;
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("DELETE FROM CLASS_SUBJECT WHERE CLASS_ID = ?;");
+		ps.setString(1, classId);
+		ps.executeUpdate();
+
+		ps.close();
+		con.close();
+		int count = 0;
+		for (String subId : subList) {
+			if (insertEnrolledSubject(classId, subId)) {
+				count++;
+			}
+}
+
+		if (count == 5) {
+			result = true;
+		}
+
+		return result;
+
+
+	}
+
+//	受講科目の追加
+	public boolean insertEnrolledSubject(String classId, String subId) throws Exception {
+		boolean result = false;
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("INSERT INTO CLASS_SUBJECT VALUES(?,?);");
+		ps.setString(1, classId);
+		ps.setString(2, subId);
+		int line = ps.executeUpdate();
+		if (line > 0) {
+			result = true;
+		}
+
+		ps.close();
+		con.close();
+
+		return result;
+	}
+
+//	特定の教員の担当科目の削除
+	public void deleteUser(String userId) throws Exception {
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("DELETE FROM SUBJECT_USER WHERE USER_ID = ?;");
+		ps.setString(1, userId);
+		ps.close();
+		con.close();
+	}
+
+//	科目の一覧を取得
+	public List<Subject> all() throws Exception {
+		List<Subject> subjects = new ArrayList<>();
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM SUBJECT;");
+		ResultSet rs = ps.executeQuery();
+
+		while(rs.next()) {
+			Subject subject = new Subject();
+			subject.setId(rs.getString("ID"));
+			subject.setSubjectName(rs.getString("NAME"));
+			UserDAO dao = new UserDAO();
+			subject.setTeachers(dao.subjectSearch(subject.getId()));
+			subjects.add(subject);
+		}
+
+		ps.close();
+		con.close();
+
+		return subjects;
+	}
+
 }

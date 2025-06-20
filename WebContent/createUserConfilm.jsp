@@ -1,9 +1,9 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>登録確認画面</title>
+  <title>ユーザー登録</title>
   <style>
     body {
       font-family: 'Meiryo', sans-serif;
@@ -35,18 +35,18 @@
     }
 
     form {
-      margin-top: 20px;
       text-align: center;
+      margin-top: 15px;
     }
 
     input[type="submit"] {
       padding: 10px 20px;
-      margin: 5px;
       background-color: #444;
       color: white;
       border: none;
       font-size: 14px;
       cursor: pointer;
+      margin: 5px;
     }
 
     input[type="submit"]:hover {
@@ -58,24 +58,23 @@
   <div class="confirm-container">
     <h2>入力内容の確認</h2>
 
-    <p>クラス: ${ student.myClass.name }</p>
-    <p>学籍番号: ${ student.id }</p>
-    <p>名前: ${ student.name }</p>
-    <p>性別: ${ student.gender.name }</p>
-    <p>入学年度: ${ student.enrollmentYear }</p>
+    <p>ユーザーID: ${ user.userId }</p>
+    <p>名前: ${ user.studentName }</p>
+    <p>役職: ${ user.role.roleName }</p>
+    <p>所属学校: ${ user.school.name }</p>
 
     <!-- 登録確定ボタン -->
-    <form action="StudentInsert.action" method="post">
-      <input type="hidden" name="class" value="${ student.myClass.id }:${ student.myClass.name }">
-      <input type="hidden" name="studentId" value="${ student.id }">
-      <input type="hidden" name="studentName" value="${ student.name }">
-      <input type="hidden" name="gender" value="${ student.gender.id }:${ student.gender.name }">
-      <input type="hidden" name="enrollmentYear" value="${ student.enrollmentYear }">
+    <form action="CreateUserResult.action" method="post">
+      <input type="hidden" name="userId" value="${ user.userId }">
+      <input type="hidden" name="name" value="${ user.studentName }">
+      <input type="hidden" name="password" value="${ user.password }">
+      <input type="hidden" name="role" value="${ user.role.id }:${ user.role.roleName }">
+      <input type="hidden" name="school" value="${ user.school.id }:${ user.school.name }">
       <input type="submit" value="登録確定">
     </form>
 
     <!-- 戻るボタン -->
-    <form action="StudentRegister.action" method="get">
+    <form action="CreateUser.action" method="get">
       <input type="submit" value="戻る">
     </form>
   </div>

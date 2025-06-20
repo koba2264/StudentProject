@@ -51,6 +51,41 @@ public class MyClassDAO extends DAO {
 		ps.close();
 		con.close();
 
+		ps.close();
+		con.close();
+
 		return myClasses;
 	}
+
+//	受け持ちクラスの取得
+	public List<MyClass> userSearch(String userId) throws Exception {
+		List<MyClass> myClasses = new ArrayList<>();
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT ID, NAME FROM CLASS INNER JOIN CLASS_USER ON CLASS.ID = CLASS_USER.CLASS_ID WHERE USER_ID = ?;");
+		ps.setString(1, userId);
+		ResultSet rs = ps.executeQuery();
+
+		while(rs.next()) {
+			MyClass myClass = new MyClass();
+			myClass.setId(rs.getString("ID"));
+			myClass.setName(rs.getString("NAME"));
+		}
+
+		ps.close();
+		con.close();
+
+		return myClasses;
+	}
+
+	public void deleteUser(String userId) throws Exception {
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("DELETE FROM CLASS_USER WHERE USER_ID = ?;");
+		ps.setString(1, userId);
+
+		ps.executeUpdate();
+		ps.close();
+		con.close();
+
+	}
 }
+
