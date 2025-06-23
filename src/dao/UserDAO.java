@@ -40,6 +40,9 @@ public class UserDAO extends DAO {
 			user.setPassword(rs.getString("password"));
 			user.setSchool(school);
 			user.setRole(role);
+			MyClassDAO clsDAO = new MyClassDAO();
+			List<MyClass> clsList = clsDAO.userSearch(user.getUserId());
+			user.setClasses(clsList);
 		}
 
 		st.close();

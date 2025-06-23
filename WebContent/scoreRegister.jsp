@@ -14,8 +14,12 @@
   <label>クラスID:
   <select id="class_select" name="class_select" required>
     <option value="">選択してください</option>
-    <option value="131" class="class_id" ${param.class_id == '131' ? 'selected' : ''}>1-31</option>
-    <option value="231" class="class_id" ${param.class_id == '231' ? 'selected' : ''}>2-31</option>
+	<c:if test='${ clsIdList.contains("131") }'>
+	    <option value="131" class="class_id" ${param.class_id == '131' ? 'selected' : ''}>1-31</option>
+	</c:if>
+	<c:if test='${ clsIdList.contains("231") }'>
+	    <option value="231" class="class_id" ${param.class_id == '231' ? 'selected' : ''}>2-31</option>
+	</c:if>
   </select>
   </label><br>
 

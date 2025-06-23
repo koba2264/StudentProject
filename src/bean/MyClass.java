@@ -10,6 +10,11 @@ import java.util.List;
  *
  */
 public class MyClass implements Serializable {
+	public MyClass() {
+	}
+	public MyClass(String id) {
+		this.id = id;
+	}
 	// クラスID
 	private String id;
 	// 学校情報
@@ -49,4 +54,14 @@ public class MyClass implements Serializable {
 	public void setSubject(Subject subject) {
 		this.subjects.add(subject);
 	}
+
+
+
+//	idで検索かけれるように追加
+    @Override
+    public boolean equals(Object o) {
+        MyClass myClass = (MyClass) o;
+        return this.id.equals(myClass.getId());
+    }
 }
+

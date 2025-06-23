@@ -28,6 +28,7 @@ public class StudentViewAction extends Action {
 //		クラス
 		String classId = request.getParameter("classId");
 
+
 //		学生情報をDBから取得
 		List<Student> students = studao.search(Id == null ? "" : Id, name == null ? "" : name, classId == null ? "" : classId);
 //		検索画面のドロップダウンで使用するクラスデータを取得

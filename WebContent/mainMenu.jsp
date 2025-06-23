@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page session="true" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -74,8 +75,10 @@
     <ul>
       <li><a href="Student.action">学生情報管理</a></li>
       <li><a href="Score.action">得点情報管理</a></li>
-      <li><a href="Subject.action">科目情報管理</a></li>
-      <li><a href="Role.action">権限管理</a></li>
+      <c:if test='${ sessionScope.user.role.id != "002" }'>
+	      <li><a href="Subject.action">科目情報管理</a></li>
+	      <li><a href="Role.action">権限管理</a></li>
+      </c:if>
       <li><a href="Logout.action">ログアウト</a></li>
     </ul>
 

@@ -143,7 +143,14 @@
               <td>
                 <form action="StudentDelete.action" method="post" onsubmit="return CheckDelete()">
                   <input type="hidden" value="${ student.id }" name="id">
-                  <input type="submit" value="削除" class="delete-btn">
+                  <c:choose>
+		              <c:when test='${ sessionScope.user.role.id != "002" || sessionScope.user.checkClass(student.myClass.id) }'>
+		                  <input type="submit" value="削除" class="delete-btn">
+		              </c:when>
+		              <c:otherwise>
+		                  <input type="submit" value="削除" class="delete-btn" disabled>
+		              </c:otherwise>
+                  </c:choose>
                 </form>
               </td>
             </tr>
