@@ -9,6 +9,7 @@ import java.util.List;
 import bean.MyClass;
 import bean.School;
 import bean.Subject;
+import bean.User;
 public class MyClassDAO extends DAO {
 	public List<MyClass> allSearch() throws Exception {
 		List<MyClass> myClasses = new ArrayList<>();
@@ -36,17 +37,25 @@ public class MyClassDAO extends DAO {
 		return myClasses;
 	}
 
-	public List<MyClass> classSearch() throws Exception {
+	public List<MyClass> classSearch(User user) throws Exception {
 		List<MyClass> myClasses = new ArrayList<>();
 		Connection con = getConnection();
-		PreparedStatement ps = con.prepareStatement("SELECT * FROM CLASS;");
+		PreparedStatement ps = null;
+		if (user.getRole().getId().equals("002")) {
+			ps = con.prepareStatement("SELECT ID, NAME FROM CLASS INNER JOIN CLASS_USER ON CLASS.ID = CLASS_USER.CLASS_ID WHERE USER_ID = ?;");
+			ps.setString(1, user.getUserId());
+		} else {
+			ps = con.prepareStatement("SELECT * FROM CLASS;");
+		}
 		ResultSet rs = ps.executeQuery();
 
 		while(rs.next()) {
 			MyClass myClass = new MyClass();
 			myClass.setId(rs.getString("ID"));
 			myClass.setName(rs.getString("NAME"));
-			myClasses.add(myClass);
+			if (!myClass.getId().equals("000")) {
+				myClasses.add(myClass);
+			}
 		}
 		ps.close();
 		con.close();
@@ -69,6 +78,8 @@ public class MyClassDAO extends DAO {
 			MyClass myClass = new MyClass();
 			myClass.setId(rs.getString("ID"));
 			myClass.setName(rs.getString("NAME"));
+			System.out.println(myClass.getId());
+			myClasses.add(myClass);
 		}
 
 		ps.close();

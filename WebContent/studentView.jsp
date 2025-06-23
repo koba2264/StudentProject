@@ -94,6 +94,13 @@
     .back-button {
       text-align: center;
       margin-top: 30px;
+      margin-left: 10px;
+      margin-right: 10px
+    }
+
+    .btn-box {
+		display:flex;
+		justify-content: center;
     }
   </style>
 </head>
@@ -106,19 +113,26 @@
       <form action="StudentView.action" method="post">
         <label>クラス:
           <select name="classId">
-            <option value="">選択しない</option>
+            <option value="no">選択しない</option>
             <c:forEach var="myClass" items="${ classes }">
-              <option value="${ myClass.id }">${ myClass.name }</option>
+            	<c:choose>
+            		<c:when test="${ classId.equals(myClass.id) }">
+			        	<option value="${ myClass.id }" selected>${ myClass.name }</option>
+            		</c:when>
+            		<c:otherwise>
+			        	<option value="${ myClass.id }">${ myClass.name }</option>
+            		</c:otherwise>
+            	</c:choose>
             </c:forEach>
           </select>
         </label>
 
         <label>名前:
-          <input type="text" name="studentName">
+          <input type="text" name="studentName" value="${ name }">
         </label>
 
         <label>学籍番号:
-          <input type="text" name="studentId">
+          <input type="text" name="studentId" value="${ id }">
         </label>
 
         <input type="submit" value="検索">
@@ -143,7 +157,14 @@
               <td>
                 <form action="StudentDelete.action" method="post" onsubmit="return CheckDelete()">
                   <input type="hidden" value="${ student.id }" name="id">
-                  <input type="submit" value="削除" class="delete-btn">
+                  <c:choose>
+		              <c:when test='${ sessionScope.user.role.id != "002" || sessionScope.user.checkClass(student.myClass.id) }'>
+		                  <input type="submit" value="削除" class="delete-btn">
+		              </c:when>
+		              <c:otherwise>
+		                  <input type="submit" value="削除" class="delete-btn" disabled>
+		              </c:otherwise>
+                  </c:choose>
                 </form>
               </td>
             </tr>
@@ -156,16 +177,29 @@
     </c:choose>
 
     <!-- 戻るボタン -->
-    <div class="back-button">
-      <form action="Student.action" method="get">
-        <input type="submit" value="戻る">
-      </form>
+    <div class="btn-box">
+	    <div class="back-button">
+	      <form action="Student.action" method="get">
+	        <input type="submit" value="戻る">
+	      </form>
+	    </div>
+		<c:if test='${ !(classId == null || classId.equals("no") || classId.equals("000") ) && sessionScope.user.role.id != "002" }'>
+		    <div class="back-button">
+		      <form action="GraduationStudent.action" method="post" onsubmit="return CheckGraduation()">
+		      	<input type="hidden" value="${ classId }" name="classId">
+		        <input type="submit" value="卒業">
+		      </form>
+		    </div>
+		</c:if>
     </div>
   </div>
 
   <script>
     function CheckDelete() {
       return confirm('削除しますか？');
+    }
+    function CheckGraduation() {
+      return confirm('卒業しますか？');
     }
   </script>
 </body>

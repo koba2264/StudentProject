@@ -80,4 +80,8 @@ public class User implements java.io.Serializable, Comparable<User> {
 		}
 		return result;
 	}
+
+	public boolean checkClass(String id) {
+		return this.classes.contains(new MyClass(id));
+	}
 }

@@ -95,4 +95,19 @@ public class StudentDAO extends DAO {
 
 		return students;
 	}
+
+//	特定のクラスの人物を卒業クラスへ移動させる
+	public boolean graduation(String classId) throws Exception {
+		boolean result = false;
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("UPDATE STUDENTS SET CLASS_ID = '000' WHERE CLASS_ID = ?;");
+		ps.setString(1, classId);
+		if (ps.executeUpdate() > 0) {
+			result = true;
+		}
+		ps.close();
+		con.close();
+
+		return result;
+	}
 }
