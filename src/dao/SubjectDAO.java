@@ -65,7 +65,7 @@ public class SubjectDAO extends DAO {
 		while(rs.next()){
 			subject = new Subject();
 			subject.setId(rs.getString("ID"));
-			subject.setSubjectName(rs.getString("NAME"));
+			subject.setName(rs.getString("NAME"));
 			subject_list.add(subject);
 		}
 
@@ -188,7 +188,7 @@ public class SubjectDAO extends DAO {
 		while(rs.next()) {
 			Subject subject = new Subject();
 			subject.setId(rs.getString("ID"));
-			subject.setSubjectName(rs.getString("NAME"));
+			subject.setName(rs.getString("NAME"));
 			UserDAO dao = new UserDAO();
 			subject.setTeachers(dao.subjectSearch(subject.getId()));
 			subjects.add(subject);
@@ -200,4 +200,32 @@ public class SubjectDAO extends DAO {
 		return subjects;
 	}
 
-}
+//	指定された科目の教師を全員削除
+	private void deleteTeacher(String id) throws Exception {
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("DELETE FROM SUBJECT_USER WHERE SUBJECT_ID = ?;");
+		ps.setString(1, id);
+		ps.executeUpdate();
+
+		ps.close();
+		con.close();
+	}
+
+//	担当教師の更新
+	public void updateTeacher(String subjectId ,String[] teacherList) throws Exception {
+//		boolean result = false;
+		this.deleteTeacher(subjectId);
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("INSERT INTO SUBJECT_USER VALUES(?,?);");
+		ps.setString(2, subjectId);
+		for (String teacher : teacherList) {
+			ps.setString(1, teacher);
+			ps.executeUpdate();
+		}
+
+		ps.close();
+		con.close();
+
+//		return result;
+	}
+ }

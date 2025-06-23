@@ -22,7 +22,7 @@ public class SubjectConfirmAction extends Action {
 		if (dao.checkId(id)) {
 			Subject subject = new Subject();
 			subject.setId(id);
-			subject.setSubjectName(name);
+			subject.setName(name);
 			request.setAttribute("subject", subject);
 			url = "subjectConfirm.jsp";
 		} else {
