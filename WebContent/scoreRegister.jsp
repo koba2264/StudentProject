@@ -48,7 +48,7 @@
 
   <label>回数:
   <select name="count_select" required>
-  	<option value="" class="count_id">選択してください</option>
+
   		<c:choose>
   			<c:when test="${ not empty count }">
   				<c:choose>
