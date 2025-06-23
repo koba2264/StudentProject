@@ -9,18 +9,20 @@
 </head>
 <body>
 	<h2>担当教員変更画面</h2>
-	<form action='' method='post'>
+	<p>${ subject.name }</p>
+	<form action='subjectTeacherUpdate.action' method='post'>
 		<c:forEach items="${ teachers }" var="user">
 			<label for="${ user.userId }">${ user.studentName }</label>
 			<c:choose>
 				<c:when test="${ managers.contains(user.userId) }">
-					<input type="checkbox" id="${ user.userId }" name="${ user.userId }" value="${ user.userId }" checked>
+					<input type="checkbox" id="${ user.userId }" name="userId" value="${ user.userId }" checked>
 				</c:when>
 				<c:otherwise>
-					<input type="checkbox" id="${ user.userId }" name="${ user.userId }" value="${ user.userId }">
+					<input type="checkbox" id="${ user.userId }" name="userId" value="${ user.userId }">
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
+		<input type="hidden" value="${ subject.id }" name="subjectId">
 		<input type="submit" value="変更">
 	</form>
 </body>
