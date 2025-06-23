@@ -28,11 +28,19 @@ public class StudentViewAction extends Action {
 //		クラス
 		String classId = request.getParameter("classId");
 
+		request.setAttribute("classId", classId);
+		if (classId != null && classId.equals("no")) {
+			classId = "";
+		}
+
 
 //		学生情報をDBから取得
 		List<Student> students = studao.search(Id == null ? "" : Id, name == null ? "" : name, classId == null ? "" : classId);
 //		検索画面のドロップダウンで使用するクラスデータを取得
 		List<MyClass> classes = clsdao.allSearch();
+
+		request.setAttribute("id", Id);
+		request.setAttribute("name", name);
 		request.setAttribute("students", students);
 		request.setAttribute("classes", classes);
 		return "studentView.jsp";
