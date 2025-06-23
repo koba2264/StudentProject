@@ -81,26 +81,30 @@
   </style>
 </head>
 <body>
-  <div class="form-container">
-    <h2>得点情報 登録フォーム</h2>
-    <form action="ScoreConfirm.action" method="post">
-      <label>クラスID:
-        <select id="class_select" name="class_select" required>
-          <option value="">選択してください</option>
-          <option value="131" ${param.class_id == '131' ? 'selected' : ''}>1-31</option>
-          <option value="231" ${param.class_id == '231' ? 'selected' : ''}>2-31</option>
-        </select>
-      </label>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div class="form-container">
+  <h2>得点情報 登録フォーム</h2>
+<form action="ScoreConfirm.action" method="post">
+  <label>クラスID:
+  <select id="class_select" name="class_select" required>
+    <option value="">選択してください</option>
+	<c:if test='${ clsIdList.contains("131") }'>
+	    <option value="131" class="class_id" ${param.class_id == '131' ? 'selected' : ''}>1-31</option>
+	</c:if>
+	<c:if test='${ clsIdList.contains("231") }'>
+	    <option value="231" class="class_id" ${param.class_id == '231' ? 'selected' : ''}>2-31</option>
+	</c:if>
+  </select>
+  </label><br>
 
-      <label>学籍番号:
-        <select id="student_select" name="student_select" required>
-          <option value="">選択してください</option>
-          <c:forEach var="student" items="${ students }">
-            <option value="${ student.id }" ${param.student_id == student.id ? 'selected' : ''}>${ student.id } : ${ student.name }</option>
-          </c:forEach>
-        </select>
-      </label>
-
+  <label>学籍番号:
+  <select id="student_select"  name="student_select" required>
+  	<option value="" class="student_id">選択してください</option>
+  	<c:forEach var="student" items="${ students }">
+  		<option value="${ student.id }" class="student_id" ${param.student_id ==  student.id  ? 'selected' : ''}>${ student.id } : ${ student.name }</option>
+  	</c:forEach>
+  </select>
+  </label><br>
       <label>性別:
         <select id="gender_select" name="gender_select" required>
           <option value="">選択してください</option>
