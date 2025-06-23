@@ -61,13 +61,3 @@ public class ScoreAction extends Action {
 
 	}
 }
-
-//		PrintWriter out = response.getWriter();
-//		String class_id = request.getParameter("class_id");
-//		StudentDAO stDAO = new StudentDAO();
-//		SubjectDAO sjDAO = new SubjectDAO();
-//		List<Student> students = stDAO.search("", "", "231");
-//		List<Subject> subjects = sjDAO.ClassSearch("231");
-//
-//		request.setAttribute("subjects", subjects);
-//		request.setAttribute("students", students);

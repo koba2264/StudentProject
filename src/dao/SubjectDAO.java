@@ -65,7 +65,7 @@ public class SubjectDAO extends DAO {
 		while(rs.next()){
 			subject = new Subject();
 			subject.setId(rs.getString("ID"));
-			subject.setSubjectName(rs.getString("NAME"));
+			subject.setName(rs.getString("NAME"));
 			subject_list.add(subject);
 		}
 
@@ -188,7 +188,7 @@ public class SubjectDAO extends DAO {
 		while(rs.next()) {
 			Subject subject = new Subject();
 			subject.setId(rs.getString("ID"));
-			subject.setSubjectName(rs.getString("NAME"));
+			subject.setName(rs.getString("NAME"));
 			UserDAO dao = new UserDAO();
 			subject.setTeachers(dao.subjectSearch(subject.getId()));
 			subjects.add(subject);

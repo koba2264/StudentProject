@@ -5,17 +5,16 @@
 </head>
 <body>
 
-    <h2>科目情報 登録完了</h2>
+    <h2>得点情報 登録完了</h2>
     <p>以下の内容で登録しました。</p>
     <ul>
-		<li>クラスID: ${param.classId}</li>
-		<li>学籍番号: ${param.studentId}</li>
-		<li>名前: ${param.name}</li>
-		<li>性別: ${param.genderId}</li>
-		<li>入学年度: ${param.enrollmentYear}</li>
+		<li>クラス名: ${class_id}</li>
+		<li>学生: ${student_id}</li>
+		<li>性別: ${gender_id}</li>
+		<li>科目名: ${subject_id}</li>
+		<li>回数: ${count}回目</li>
+		<li>点数: ${score}点</li>
     </ul>
-  <form action="StudentRegister.action" method="get">
-    <input type="submit" value="戻る">
-  </form>
+<input type = "button" value="戻る" onclick = "location.href='Score.action'">
 </body>
 </html>

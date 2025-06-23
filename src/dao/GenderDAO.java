@@ -27,4 +27,21 @@ public class GenderDAO extends DAO {
 
 		return genders;
 	}
+	public Gender search(String student_id) throws Exception {
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT GENDER.ID AS GENDER_ID,GENDER.NAME AS GENDER_NAME FROM STUDENTS INNER JOIN GENDER ON STUDENTS.GENDER_ID = GENDER.ID WHERE STUDENTS.ID = ?");
+		ps.setString(1,student_id);
+		ResultSet rs = ps.executeQuery();
+		
+		Gender gender = null;
+		while (rs.next()) {
+			gender = new Gender();
+			gender.setId(rs.getString("gender_id"));
+			gender.setName(rs.getString("gender_name"));
+		}
+		ps.close();
+		con.close();
+		
+		return gender;
+	}
 }

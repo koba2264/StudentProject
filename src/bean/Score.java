@@ -6,6 +6,8 @@ package bean;
 public class Score implements java.io.Serializable {
 	// 生徒のID
 	private String studentId;
+	// 性別
+	private String genderId;
 	// 科目情報
 	private Subject subject;
 	// クラスのID
@@ -19,6 +21,9 @@ public class Score implements java.io.Serializable {
 	// ゲッター
 	public String getStudentId(){
 		return this.studentId;
+	}
+	public String getGenderId(){
+		return this.genderId;
 	}
 	public Subject getSubject(){
 		return this.subject;
@@ -37,6 +42,9 @@ public class Score implements java.io.Serializable {
 	// セッター
 	public void setStudentId(String studentId){
 		this.studentId = studentId;
+	}
+	public void setGenderId(String genderId){
+		this.genderId = genderId;
 	}
 	public void setSubject(Subject subject){
 		this.subject = subject;

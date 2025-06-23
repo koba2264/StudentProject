@@ -5,24 +5,161 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>学生情報 登録フォーム</title>
+  <title>得点情報 登録フォーム</title>
 </head>
 <body>
-  <h2>学生情報 登録フォーム</h2>
-<form action="StudentRegisterServlet.action" method="post">
-  <label>学籍番号: <input type="text" name="studentId" required></label><br>
-  <label>名前: <input type="text" name="studentName" required></label><br>
-  <label>クラスID: <input type="text" name="classId" required></label><br>
-  <label>性別:
-  <select name="genderId" required>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+  <h2>得点情報 登録フォーム</h2>
+<form action="ScoreConfirm.action" method="post">
+  <label>クラスID:
+  <select id="class_select" name="class_select" required>
     <option value="">選択してください</option>
-    <option value="01">男性</option>
-    <option value="02">女性</option>
-    <option value="03">無回答</option>
+    <option value="131" class="class_id" ${param.class_id == '131' ? 'selected' : ''}>1-31</option>
+    <option value="231" class="class_id" ${param.class_id == '231' ? 'selected' : ''}>2-31</option>
   </select>
-</label><br>
-  <label>入学年度: <input type="number" name="enrollmentYear" min="1000" max="9999" required></label><br><br>
-  <input type="submit" value="登録">
+  </label><br>
+
+  <label>学籍番号:
+  <select id="student_select"  name="student_select" required>
+  	<option value="" class="student_id">選択してください</option>
+  	<c:forEach var="student" items="${ students }">
+  		<option value="${ student.id }" class="student_id" ${param.student_id ==  student.id  ? 'selected' : ''}>${ student.id } : ${ student.name }</option>
+  	</c:forEach>
+  </select>
+  </label><br>
+
+  <label>性別:
+        <select id="gender_select" name="gender_select" required>
+            <option value="" class="gender_id">選択してください</option>
+            <option value="01" class="gender_id" ${gender.id == "01" ? 'selected' : ''}>男性</option>
+            <option value="02"   class="gender_id" ${gender.id == "02" ? 'selected' : ''}>女性</option>
+            <option value="03" class="gender_id" ${gender.id == "03" ? 'selected' : ''}>無回答</option>
+        </select>
+  </label><br>
+
+  <label>科目名:
+  <select id="subject_select" name="subject_select" required>
+  	<option value="" class="subject_id">選択してください</option>
+  	<c:forEach var="subject" items="${ subjects }">
+  		<option value="${ subject.id }" class="subject_id" ${subject.id == subject_id ? 'selected' : ''}>${ subject.id } : ${ subject.name }</option>
+  	</c:forEach>
+  </select>
+  </label><br>
+
+  <label>回数:
+  <select name="count_select" required>
+  	<option value="" class="count_id">選択してください</option>
+  		<c:choose>
+		    <c:when test="${count == 0}">
+		      <option value=1 selected>1回目</option>
+		      <option value=2>2回目</option>
+		    </c:when>
+		    <c:when test="${count == 1}">
+		      <option value=1 disabled>1回目</option>
+		      <option value=2 selected>2回目</option>
+		    </c:when>
+		    <c:when test="${count == 2}">
+		      <option value="registered" selected>登録済み</option>
+		    </c:when>
+		    <c:otherwise>
+		      <option value="">選択してください</option>
+		    </c:otherwise>
+		</c:choose>
+  </select>
+  </label><br>
+
+  <label>点数:
+  <input type="number" name="score">
+  </label><br>
+
+
+  <c:choose>
+  	<c:when test="${ count == 2 }">
+  		<input type="submit" value="登録" disabled>
+  	</c:when>
+  	<c:otherwise>
+		<input type="submit" value="登録">
+  	</c:otherwise>
+  </c:choose>
 </form>
+<input type = "button" value="戻る" onclick = "location.href='Score.action'">
+
+<script type="text/javascript">
+const classElm = document.getElementById("class_select");
+const studentElm = document.getElementById("student_select");
+const subjectElm = document.getElementById("subject_select");
+classElm.addEventListener('change',function(){
+	const form = document.createElement('form');
+	const class_request = document.createElement('input');
+
+	form.method = 'POST';
+	form.action = 'ScoreRegister.action';
+
+	class_request.type = 'hidden';
+	class_request.name = 'class_id';
+	class_request.value = this.value;
+
+
+	form.appendChild(class_request);
+	document.body.appendChild(form);
+
+	form.submit();
+})
+
+studentElm.addEventListener('change',function(){
+	const form = document.createElement('form');
+	const student_request = document.createElement('input');
+	const class_request = document.createElement('input');
+
+	form.method = 'POST';
+	form.action = 'ScoreRegister.action';
+
+	student_request.type = 'hidden';
+	student_request.name = 'student_id';
+	student_request.value = this.value;
+
+	class_request.type = 'hidden';
+	class_request.name = 'class_id';
+	class_request.value = classElm.value;
+
+
+	form.appendChild(student_request);
+	form.appendChild(class_request);
+	document.body.appendChild(form);
+
+	form.submit();
+})
+
+subjectElm.addEventListener('change',function(){
+	const form = document.createElement('form');
+	const subject_request = document.createElement('input');
+	const student_request = document.createElement('input');
+	const class_request = document.createElement('input');
+
+	form.method = 'POST';
+	form.action = 'ScoreRegister.action';
+
+	subject_request.type = 'hidden';
+	subject_request.name = 'subject_id';
+	subject_request.value = this.value;
+
+	student_request.type = 'hidden';
+	student_request.name = 'student_id';
+	student_request.value = studentElm.value;
+
+	class_request.type = 'hidden';
+	class_request.name = 'class_id';
+	class_request.value = classElm.value;
+
+
+	form.appendChild(subject_request);
+	form.appendChild(student_request);
+	form.appendChild(class_request);
+	document.body.appendChild(form);
+
+	form.submit();
+})
+
+</script>
 </body>
 </html>
