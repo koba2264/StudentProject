@@ -31,7 +31,7 @@ public class CreateUserConfilmAction extends Action {
 
 		UserDAO dao = new UserDAO();
 		if (dao.checkId(user.getUserId())) {
-			url = "createUser.jsp";
+			url = "CreateUser.action";
 			request.setAttribute("message", "idが被っています");
 		}
 
