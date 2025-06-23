@@ -12,7 +12,7 @@ public class SubjectInsertAction extends Action {
 		String url = "subjectRegister.jsp";
 		Subject subject = new Subject();
 		subject.setId(request.getParameter("id"));
-		subject.setSubjectName(request.getParameter("name"));
+		subject.setName(request.getParameter("name"));
 		SubjectDAO dao = new SubjectDAO();
 		request.setAttribute("subject", subject);
 		if (dao.insert(subject)) {

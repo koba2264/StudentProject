@@ -62,4 +62,38 @@ public class ScoreDAO extends DAO {
 
 		return scores;
 	}
+
+	// 登録
+	public void insert(String student_id,String subject_id,Integer count,String class_id,Integer score,String gender_id) throws Exception{
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("INSERT INTO SCORE(STUDENT_ID,SUBJECT_ID,COUNT,CLASS_ID,SCORE,GENDER_ID) VALUES(?,?,?,?,?,?); ");
+		ps.setString(1,student_id);
+		ps.setString(2,subject_id);
+		ps.setInt(3,count);
+		ps.setString(4,class_id);
+		ps.setInt(5,score);
+		ps.setString(6,gender_id);
+		int line = ps.executeUpdate();
+		ps.close();
+		con.close();
+
+	}
+
+	public int sizeSearch(String student_id, String subject_id) throws Exception {
+		int count = 0;
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM SCORE where student_id = ? and subject_id = ?;");
+		ps.setString(1, student_id);
+		ps.setString(2, subject_id);
+		ResultSet rs = ps.executeQuery();
+
+
+		while(rs.next()) {
+			count++;
+		}
+
+		ps.close();
+		con.close();
+		return count;
+	}
 }

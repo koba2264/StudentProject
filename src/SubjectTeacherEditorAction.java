@@ -15,7 +15,7 @@ public class SubjectTeacherEditorAction extends Action {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Subject subject = new Subject();
 		subject.setId(request.getParameter("id"));
-		subject.setSubjectName(request.getParameter("name"));
+		subject.setName(request.getParameter("name"));
 		UserDAO dao = new UserDAO();
 		List<User> teachers = dao.roleAll("002");
 		List<User> managers = dao.subjectSearch(subject.getId());
