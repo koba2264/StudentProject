@@ -50,20 +50,27 @@
   <select name="count_select" required>
   	<option value="" class="count_id">選択してください</option>
   		<c:choose>
-		    <c:when test="${count == 0}">
-		      <option value=1 selected>1回目</option>
-		      <option value=2>2回目</option>
-		    </c:when>
-		    <c:when test="${count == 1}">
-		      <option value=1 disabled>1回目</option>
-		      <option value=2 selected>2回目</option>
-		    </c:when>
-		    <c:when test="${count == 2}">
-		      <option value="registered" selected>登録済み</option>
-		    </c:when>
-		    <c:otherwise>
-		      <option value="">選択してください</option>
-		    </c:otherwise>
+  			<c:when test="${ not empty count }">
+  				<c:choose>
+				    <c:when test="${count.size() == 2}">
+				      <option value="registered" selected>登録済み</option>
+				    </c:when>
+				    <c:when test="${count.get(0) == 1}">
+				      <option value=1 disabled>1回目</option>
+				      <option value=2 selected>2回目</option>
+				    </c:when>
+				    <c:when test="${count.get(0) == 2}">
+				      <option value=1 selected>1回目</option>
+				      <option value=2 disabled>2回目</option>
+				    </c:when>
+			    </c:choose>
+  			</c:when>
+  			<c:otherwise>
+  				<option value="" selected>選択してください</option>
+  				<option value=1>1回目</option>
+				<option value=2>2回目</option>
+
+  			</c:otherwise>
 		</c:choose>
   </select>
   </label><br>
@@ -74,7 +81,7 @@
 
 
   <c:choose>
-  	<c:when test="${ count == 2 }">
+  	<c:when test="${ count.size() == 2 }">
   		<input type="submit" value="登録" disabled>
   	</c:when>
   	<c:otherwise>

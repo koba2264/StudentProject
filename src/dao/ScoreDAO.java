@@ -79,21 +79,46 @@ public class ScoreDAO extends DAO {
 
 	}
 
-	public int sizeSearch(String student_id, String subject_id) throws Exception {
-		int count = 0;
+	public List<Integer> sizeSearch(String student_id, String subject_id) throws Exception {
+		List<Integer> count = new ArrayList<>();
 		Connection con = getConnection();
-		PreparedStatement ps = con.prepareStatement("SELECT * FROM SCORE where student_id = ? and subject_id = ?;");
+		PreparedStatement ps = con.prepareStatement("SELECT COUNT FROM SCORE where student_id = ? and subject_id = ?;");
 		ps.setString(1, student_id);
 		ps.setString(2, subject_id);
 		ResultSet rs = ps.executeQuery();
 
 
 		while(rs.next()) {
-			count++;
+			count.add(rs.getInt("count"));
 		}
 
 		ps.close();
 		con.close();
 		return count;
+	}
+
+	public void update(String student_id, String subject_id,Integer count,Integer score) throws Exception {
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("UPDATE SCORE SET SCORE = ? WHERE STUDENT_ID = ? and SUBJECT_ID = ? and count = ?;");
+		ps.setInt(1, score);
+		ps.setString(2, student_id);
+		ps.setString(3, subject_id);
+		ps.setInt(4, count);
+		int line = ps.executeUpdate();
+
+		ps.close();
+		con.close();
+	}
+
+	public void delete(String student_id, String subject_id,Integer count) throws Exception {
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("DELETE FROM SCORE WHERE STUDENT_ID = ? AND SUBJECT_ID = ? AND COUNT = ?;");
+		ps.setString(1, student_id);
+		ps.setString(2, subject_id);
+		ps.setInt(3, count);
+		int line = ps.executeUpdate();
+
+		ps.close();
+		con.close();
 	}
 }

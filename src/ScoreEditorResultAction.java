@@ -13,9 +13,9 @@ public class ScoreEditorResultAction extends Action {
 		Integer score = Integer.parseInt(request.getParameter("score"));
 
 		ScoreDAO scoDAO = new ScoreDAO();
-//		scoDAO.update(student_id, subject_id, count, score);
+		scoDAO.update(student_id, subject_id, count, score);
 
-		return "score.jsp";
+		return "Score.action";
 	}
 
 }
