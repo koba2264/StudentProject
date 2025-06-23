@@ -139,7 +139,7 @@
       </label>
 
       <label>点数:
-        <input type="number" name="score">
+        <input type="number" min=0 max=100 name="score">
       </label>
 
       <div class="button-area">
