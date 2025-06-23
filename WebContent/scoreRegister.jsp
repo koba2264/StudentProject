@@ -76,7 +76,7 @@
   </label><br>
 
   <label>点数:
-  <input type="number" name="score">
+  <input type="number" name="score" required>
   </label><br>
 
 

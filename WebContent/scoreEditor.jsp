@@ -15,7 +15,7 @@
   <div>科目名 : ${ subject_id }-${ subject_name }</div><br>
   <div>回数 : ${ score_info.count }回目</div><br>
   <label>点数:
-  <input type="number" min=0 max=100 name="score" value="${ score_info.score }">
+  <input type="number" min=0 max=100 name="score" value="${ score_info.score }" required>
   </label><br>
 
   <input type="hidden" value="${ student_id }" name="student_id">
