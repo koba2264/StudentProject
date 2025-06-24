@@ -37,6 +37,11 @@
 		flex: none;
 	}
 
+	button{
+		border : none;
+		background-color : white;
+	}
+
 </style>
 </head>
 <body>
@@ -65,7 +70,13 @@
 						<c:forEach var="score" items="${ scoreList }">
 							<c:choose>
 							  <c:when test="${score.score != null}">
-							    <td>${score.score}</td>
+							    <td>
+							     <button class="score"
+							     data-count="${ score.count }" data-score="${ score.score }"
+							     data-student_id="${ student.id }" data-student_name="${ student.name }"
+							     data-subject_id="${ score.subject.id }" data-subject_name="${ score.subject.name }">
+							     ${score.score}</button>
+							    </td>
 							  </c:when>
 							  <c:otherwise>
 							    <td>-</td>
@@ -87,6 +98,7 @@
   </form>
 <script type="text/javascript">
 const selectElm = document.getElementById("select");
+const scoresElm = document.querySelectorAll(".score");
 selectElm.addEventListener('change',function(){
 	const form = document.createElement('form');
 	const request = document.createElement('input');
@@ -104,6 +116,58 @@ selectElm.addEventListener('change',function(){
 
 	form.submit();
 })
+
+for(const scoreElm of scoresElm){
+	scoreElm.addEventListener('click',function(){
+		const form = document.createElement('form');
+		const studentId_request = document.createElement('input');
+		const studentName_request = document.createElement('input');
+		const subjectId_request = document.createElement('input');
+		const subjectName_request = document.createElement('input');
+		const count = document.createElement('input');
+		const score = document.createElement('input');
+
+
+		form.method = 'POST';
+		form.action = 'ScoreEditor.action';
+
+		studentId_request.type = 'hidden';
+		studentId_request.name = 'student_id';
+		studentId_request.value = this.dataset.student_id;
+
+		studentName_request.type = 'hidden';
+		studentName_request.name = 'student_name';
+		studentName_request.value = this.dataset.student_name;
+
+		subjectId_request.type = 'hidden';
+		subjectId_request.name = 'subject_id';
+		subjectId_request.value = this.dataset.subject_id;
+
+		subjectName_request.type = 'hidden';
+		subjectName_request.name = 'subject_name';
+		subjectName_request.value = this.dataset.subject_name;
+
+		count.type = 'hidden';
+		count.name = 'count';
+		count.value = this.dataset.count;
+
+		score.type = 'hidden';
+		score.name = 'score';
+		score.value = this.dataset.score;
+
+		form.appendChild(studentId_request);
+		form.appendChild(studentName_request);
+		form.appendChild(subjectId_request);
+		form.appendChild(subjectName_request);
+		form.appendChild(count);
+		form.appendChild(score);
+		document.body.appendChild(form);
+
+		form.submit();
+	})
+}
+
+
 
 </script>
 

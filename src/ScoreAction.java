@@ -45,11 +45,25 @@ public class ScoreAction extends Action {
 			List<List<Score>> sco = new ArrayList<>();
 			for(Subject subject : subjects){
 				List<Score> ScoreList = student.getScores().get(subject.getId());
-				while (ScoreList.size() < 2) {
+				for(Score score : ScoreList){
+					score.getSubject().setName(subject.getName());;
+				}
+				if(ScoreList.size() == 0){
+					while (ScoreList.size() < 2) {
+						null_score = new Score();
+						null_score.setSubject(subject);
+						null_score.setCount(ScoreList.size() + 1);
+						ScoreList.add(null_score);
+					}
+				} else if(ScoreList.size() == 1){
 					null_score = new Score();
 					null_score.setSubject(subject);
-					null_score.setCount(ScoreList.size() + 1);
-					ScoreList.add(null_score);
+					null_score.setCount(ScoreList.size());
+					if(ScoreList.get(0).getCount() == 2){
+						ScoreList.add(0,null_score);
+					}else{
+						ScoreList.add(null_score);
+					}
 				}
 				sco.add(ScoreList);
 			scores.put(student.getId(), sco);

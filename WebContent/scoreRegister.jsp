@@ -112,105 +112,140 @@
           <option value="02" ${gender.id == "02" ? 'selected' : ''}>女性</option>
           <option value="03" ${gender.id == "03" ? 'selected' : ''}>無回答</option>
         </select>
-      </label>
 
-      <label>科目名:
-        <select id="subject_select" name="subject_select" required>
-          <option value="">選択してください</option>
-          <c:forEach var="subject" items="${ subjects }">
-            <option value="${ subject.id }" ${subject.id == subject_id ? 'selected' : ''}>${ subject.id } : ${ subject.name }</option>
-          </c:forEach>
-        </select>
-      </label>
+  </label><br>
 
-      <label>回数:
-        <select name="count_select" required>
-          <option value="">選択してください</option>
-          <c:choose>
-            <c:when test="${count == 0}">
-              <option value="1" selected>1回目</option>
-              <option value="2">2回目</option>
-            </c:when>
-            <c:when test="${count == 1}">
-              <option value="1" disabled>1回目</option>
-              <option value="2" selected>2回目</option>
-            </c:when>
-            <c:when test="${count == 2}">
-              <option value="registered" selected>登録済み</option>
-            </c:when>
-          </c:choose>
-        </select>
-      </label>
+  <label>科目名:
+  <select id="subject_select" name="subject_select" required>
+  	<option value="" class="subject_id">選択してください</option>
+  	<c:forEach var="subject" items="${ subjects }">
+  		<option value="${ subject.id }" class="subject_id" ${subject.id == subject_id ? 'selected' : ''}>${ subject.id } : ${ subject.name }</option>
+  	</c:forEach>
+  </select>
+  </label><br>
 
-      <label>点数:
-        <input type="number" min=0 max=100 name="score">
-      </label>
+  <label>回数:
+  <select name="count_select" required>
 
-      <div class="button-area">
-        <c:choose>
-          <c:when test="${ count == 2 }">
-            <input type="submit" value="登録" disabled>
-          </c:when>
-          <c:otherwise>
-            <input type="submit" value="登録">
-          </c:otherwise>
-        </c:choose>
-        <input type="button" value="戻る" onclick="location.href='Score.action'">
-      </div>
-    </form>
-  </div>
+  		<c:choose>
+  			<c:when test="${ not empty count }">
+  				<c:choose>
+				    <c:when test="${count.size() == 2}">
+				      <option value="registered" selected>登録済み</option>
+				    </c:when>
+				    <c:when test="${count.get(0) == 1}">
+				      <option value=1 disabled>1回目</option>
+				      <option value=2 selected>2回目</option>
+				    </c:when>
+				    <c:when test="${count.get(0) == 2}">
+				      <option value=1 selected>1回目</option>
+				      <option value=2 disabled>2回目</option>
+				    </c:when>
+			    </c:choose>
+  			</c:when>
+  			<c:otherwise>
+  				<option value="" selected>選択してください</option>
+  				<option value=1>1回目</option>
+				<option value=2>2回目</option>
 
-  <script>
-    const classElm = document.getElementById("class_select");
-    const studentElm = document.getElementById("student_select");
-    const subjectElm = document.getElementById("subject_select");
+  			</c:otherwise>
+		</c:choose>
+  </select>
+  </label><br>
 
-    classElm.addEventListener('change', function () {
-      const form = document.createElement('form');
-      const input = document.createElement('input');
-      form.method = 'POST';
-      form.action = 'ScoreRegister.action';
-      input.type = 'hidden';
-      input.name = 'class_id';
-      input.value = this.value;
-      form.appendChild(input);
-      document.body.appendChild(form);
-      form.submit();
-    });
+  <label>点数:
+  <input type="number" name="score" required>
+  </label><br>
 
-    studentElm.addEventListener('change', function () {
-      const form = document.createElement('form');
-      form.method = 'POST';
-      form.action = 'ScoreRegister.action';
 
-      ['class_id', 'student_id'].forEach((name, i) => {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = name;
-        input.value = i === 0 ? classElm.value : this.value;
-        form.appendChild(input);
-      });
+  <c:choose>
+  	<c:when test="${ count.size() == 2 }">
+  		<input type="submit" value="登録" disabled>
+  	</c:when>
+  	<c:otherwise>
+		<input type="submit" value="登録">
+  	</c:otherwise>
+  </c:choose>
+</form>
+<input type = "button" value="戻る" onclick = "location.href='Score.action'">
 
-      document.body.appendChild(form);
-      form.submit();
-    });
+<script type="text/javascript">
+const classElm = document.getElementById("class_select");
+const studentElm = document.getElementById("student_select");
+const subjectElm = document.getElementById("subject_select");
+classElm.addEventListener('change',function(){
+	const form = document.createElement('form');
+	const class_request = document.createElement('input');
 
-    subjectElm.addEventListener('change', function () {
-      const form = document.createElement('form');
-      form.method = 'POST';
-      form.action = 'ScoreRegister.action';
+	form.method = 'POST';
+	form.action = 'ScoreRegister.action';
 
-      ['class_id', 'student_id', 'subject_id'].forEach((name, i) => {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = name;
-        input.value = [classElm.value, studentElm.value, this.value][i];
-        form.appendChild(input);
-      });
+	class_request.type = 'hidden';
+	class_request.name = 'class_id';
+	class_request.value = this.value;
 
-      document.body.appendChild(form);
-      form.submit();
-    });
-  </script>
+
+	form.appendChild(class_request);
+	document.body.appendChild(form);
+
+	form.submit();
+})
+
+studentElm.addEventListener('change',function(){
+	const form = document.createElement('form');
+	const student_request = document.createElement('input');
+	const class_request = document.createElement('input');
+
+	form.method = 'POST';
+	form.action = 'ScoreRegister.action';
+
+	student_request.type = 'hidden';
+	student_request.name = 'student_id';
+	student_request.value = this.value;
+
+	class_request.type = 'hidden';
+	class_request.name = 'class_id';
+	class_request.value = classElm.value;
+
+
+	form.appendChild(student_request);
+	form.appendChild(class_request);
+	document.body.appendChild(form);
+
+	form.submit();
+})
+
+subjectElm.addEventListener('change',function(){
+	const form = document.createElement('form');
+	const subject_request = document.createElement('input');
+	const student_request = document.createElement('input');
+	const class_request = document.createElement('input');
+
+	form.method = 'POST';
+	form.action = 'ScoreRegister.action';
+
+	subject_request.type = 'hidden';
+	subject_request.name = 'subject_id';
+	subject_request.value = this.value;
+
+	student_request.type = 'hidden';
+	student_request.name = 'student_id';
+	student_request.value = studentElm.value;
+
+	class_request.type = 'hidden';
+	class_request.name = 'class_id';
+	class_request.value = classElm.value;
+
+
+	form.appendChild(subject_request);
+	form.appendChild(student_request);
+	form.appendChild(class_request);
+	document.body.appendChild(form);
+
+	form.submit();
+})
+
+</script>
+
 </body>
 </html>

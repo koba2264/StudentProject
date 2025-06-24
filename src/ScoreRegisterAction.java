@@ -52,7 +52,9 @@ public class ScoreRegisterAction extends Action {
 		List<Student> students = stuDAO.search("", "", class_id);
 		List<Subject> subjects = subDAO.ClassSearch(class_id);
 		Gender gender = genDAO.search(student_id);
-		int count = scoDAO.sizeSearch(student_id,subject_id);
+
+		List<Integer> count = scoDAO.sizeSearch(student_id,subject_id);
+
 
 		request.setAttribute("students", students);
 		request.setAttribute("subjects", subjects);
