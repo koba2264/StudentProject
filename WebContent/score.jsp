@@ -91,12 +91,11 @@
 
 			</table>
 			<br>
+<div id = "result"></div>
+<input type = "button" value="追加" onclick = "location.href='ScoreRegister.action'">
 	    <form action="mainMenu.jsp" method="get">
     <input type="submit" value="戻る">
   </form>
-<div id = "result"></div>
-<input type = "button" value="追加" onclick = "location.href='ScoreRegister.action'">
-
 <script type="text/javascript">
 const selectElm = document.getElementById("select");
 const scoresElm = document.querySelectorAll(".score");

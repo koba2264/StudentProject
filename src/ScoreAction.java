@@ -7,11 +7,13 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bean.MyClass;
 import bean.Score;
 import bean.Student;
 import bean.Subject;
+import bean.User;
 import dao.MyClassDAO;
 import dao.StudentDAO;
 import dao.SubjectDAO;
@@ -25,6 +27,8 @@ public class ScoreAction extends Action {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
+		HttpSession session = ((HttpServletRequest)request).getSession();
+		User user = (User)session.getAttribute("user");
 		String class_id = request.getParameter("class_id");
 		if (class_id == null){
 			class_id = "131";
@@ -36,7 +40,7 @@ public class ScoreAction extends Action {
 		Map<String, List<List<Score>>> scores = new HashMap<>();
 		List<Subject> subjects = subDAO.ClassSearch(class_id);
 		List<Student> students = stDAO.search("", "", class_id);
-		List<MyClass> myclasses = mcDAO.classSearch();
+		List<MyClass> myclasses = mcDAO.classSearch(user);
 		for(Student student : students){
 			List<List<Score>> sco = new ArrayList<>();
 			for(Subject subject : subjects){

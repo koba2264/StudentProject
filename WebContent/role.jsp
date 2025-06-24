@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,7 +76,9 @@
 	<div class="user-container">
 	<h2>利用者管理</h2>
   	<ul>
-    	<li><a href="CreateUser.action">ユーザー登録</a></li>
+  		<c:if test='${ sessionScope.user.role.id != "001" }'>
+	    	<li><a href="CreateUser.action">ユーザー登録</a></li>
+  		</c:if>
     	<li><a href="UserView.action">ユーザー一覧</a></li>
   	</ul>
     <form action="mainMenu.jsp" method="get">

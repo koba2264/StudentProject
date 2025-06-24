@@ -1,21 +1,99 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page session="true" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <title>得点情報 登録フォーム</title>
+  <style>
+    body {
+      font-family: 'Meiryo', sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .form-container {
+      width: 600px;
+      margin: 80px auto;
+      padding: 30px;
+      border: 2px solid #444;
+      background-color: #f9f9f9;
+      box-sizing: border-box;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 20px;
+      color: #333;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      font-size: 14px;
+      color: #222;
+    }
+
+	select, input[type="number"] {
+	  width: 60%;
+	  padding: 8px;
+	  border: 2px solid #444;
+	  font-size: 14px;
+	  height: 36px;
+	  box-sizing: border-box;
+	
+	  /* ↓スピンボタン消して横幅対策 */
+	  -moz-appearance: textfield;
+	}
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+	  -webkit-appearance: none;
+	  margin: 0;
+}
+
+    input[type="submit"],
+    input[type="button"] {
+      padding: 10px 20px;
+      background-color: #444;
+      color: white;
+      border: none;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    input[type="submit"]:hover,
+    input[type="button"]:hover {
+      background-color: #000;
+    }
+
+
+    .button-area {
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div class="form-container">
   <h2>得点情報 登録フォーム</h2>
 <form action="ScoreConfirm.action" method="post">
   <label>クラスID:
   <select id="class_select" name="class_select" required>
     <option value="">選択してください</option>
-    <option value="131" class="class_id" ${param.class_id == '131' ? 'selected' : ''}>1-31</option>
-    <option value="231" class="class_id" ${param.class_id == '231' ? 'selected' : ''}>2-31</option>
+	<c:if test='${ clsIdList.contains("131") }'>
+	    <option value="131" class="class_id" ${param.class_id == '131' ? 'selected' : ''}>1-31</option>
+	</c:if>
+	<c:if test='${ clsIdList.contains("231") }'>
+	    <option value="231" class="class_id" ${param.class_id == '231' ? 'selected' : ''}>2-31</option>
+	</c:if>
   </select>
   </label><br>
 
@@ -27,14 +105,14 @@
   	</c:forEach>
   </select>
   </label><br>
-
-  <label>性別:
+      <label>性別:
         <select id="gender_select" name="gender_select" required>
-            <option value="" class="gender_id">選択してください</option>
-            <option value="01" class="gender_id" ${gender.id == "01" ? 'selected' : ''}>男性</option>
-            <option value="02"   class="gender_id" ${gender.id == "02" ? 'selected' : ''}>女性</option>
-            <option value="03" class="gender_id" ${gender.id == "03" ? 'selected' : ''}>無回答</option>
+          <option value="">選択してください</option>
+          <option value="01" ${gender.id == "01" ? 'selected' : ''}>男性</option>
+          <option value="02" ${gender.id == "02" ? 'selected' : ''}>女性</option>
+          <option value="03" ${gender.id == "03" ? 'selected' : ''}>無回答</option>
         </select>
+
   </label><br>
 
   <label>科目名:
@@ -168,5 +246,6 @@ subjectElm.addEventListener('change',function(){
 })
 
 </script>
+
 </body>
 </html>
