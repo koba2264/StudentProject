@@ -84,10 +84,8 @@
         <th>名前</th>
         <th>役職</th>
         <th>所属学校</th>
-        <c:if test='${ sessionScope.user.role.id != "001" }'>
-	        <th>編集</th>
-	        <th>削除</th>
-        </c:if>
+        <th>編集</th>
+        <th>削除</th>
       </tr>
       <c:forEach var="user" items="${ users }">
         <tr>
@@ -97,20 +95,18 @@
           <td>${ user.studentName }</td>
           <td>${ user.role.roleName }</td>
           <td>${ user.school.name }</td>
-          <c:if test='${ sessionScope.user.role.id != "001" }'>
-	          <td>
-	            <form action="UserEditor.action" method="post">
-	              <input type="hidden" value="${ user.userId }" name="id">
-	              <input type="submit" value="編集">
-	            </form>
-	          </td>
-	          <td>
-	            <form action="UserDelete.action" method="post" onsubmit="return CheckDelete()">
-	              <input type="hidden" value="${ user.userId }" name="id">
-	              <input type="submit" value="削除" class="delete-btn">
-	            </form>
-	          </td>
-          </c:if>
+          <td>
+            <form action="UserEditor.action" method="post">
+              <input type="hidden" value="${ user.userId }" name="id">
+              <input type="submit" value="編集">
+            </form>
+          </td>
+          <td>
+            <form action="UserDelete.action" method="post" onsubmit="return CheckDelete()">
+              <input type="hidden" value="${ user.userId }" name="id">
+              <input type="submit" value="削除" class="delete-btn">
+            </form>
+          </td>
         </tr>
       </c:forEach>
     </table>
