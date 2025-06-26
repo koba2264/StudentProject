@@ -78,7 +78,9 @@
     <p style="color:red;">${ message }</p>
     <table>
       <tr>
-        <th>ID</th>
+        <c:if test='${ sessionScope.user.role.id == "000" }'>
+        	<th>ID</th>
+        </c:if>
         <th>名前</th>
         <th>役職</th>
         <th>所属学校</th>
@@ -89,7 +91,9 @@
       </tr>
       <c:forEach var="user" items="${ users }">
         <tr>
-          <td>${ user.userId }</td>
+          <c:if test='${ sessionScope.user.role.id == "000" }'>
+	          <td>${ user.userId }</td>
+          </c:if>
           <td>${ user.studentName }</td>
           <td>${ user.role.roleName }</td>
           <td>${ user.school.name }</td>
