@@ -144,7 +144,7 @@
   </label><br>
 
   <label>点数:
-  <input type="number" name="score" required>
+  <input type="number" name="score" min="0" max="100" required>
   </label><br>
 
 
