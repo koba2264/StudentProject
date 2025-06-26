@@ -82,7 +82,7 @@
       <li><a href="Logout.action">ログアウト</a></li>
     </ul>
 
-    <p>情報が届いているか確認するために表示させています</p>
+    <!--   <p>情報が届いているか確認するために表示させています</p>
     <p>ログインユーザー : ${ sessionScope.user.studentName }</p>
     <p>ユーザーid : ${ sessionScope.user.userId }</p>
     <p>パスワード : ${ sessionScope.user.password }</p>
@@ -91,7 +91,7 @@
     <p>学校名 : ${ sessionScope.user.school.getName() }</p>
     <hr>
     <p>権限id : ${ sessionScope.user.role.getId() }</p>
-    <p>権限名 : ${ sessionScope.user.role.getRoleName() }</p>
+    <p>権限名 : ${ sessionScope.user.role.getRoleName() }</p>-->
   </div>
 </body>
 </html>
