@@ -227,4 +227,35 @@ public class UserDAO extends DAO {
 
 		return users;
 	}
+
+	public void myClass(String classId, String userId) throws Exception {
+		this.deleteMyClass(userId);
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("INSERT INTO CLASS_USER VALUES (?,?);");
+		ps.setString(1, userId);
+		ps.setString(2, classId);
+		ps.executeUpdate();
+		ps.close();
+		con.close();
+	}
+
+	public void deleteMyClass(String userId) throws Exception {
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("DELETE FROM CLASS_USER WHERE USER_ID = ?;");
+		ps.setString(1, userId);
+		ps.executeUpdate();
+		ps.close();
+		con.close();
+
+	}
+	public void updateStu(String name, String id, String classId) throws Exception {
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement("UPDATE STUDENTS SET NAME = ? ,CLASS_ID = ? WHERE ID = ?;");
+		ps.setString(1, name);
+		ps.setString(2, classId);
+		ps.setString(3, id);
+		ps.executeUpdate();
+		ps.close();
+		con.close();
+	}
 }

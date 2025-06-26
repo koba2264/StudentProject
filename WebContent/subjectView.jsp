@@ -4,7 +4,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>科目一覧</title>
+  <title>受講科目一覧</title>
   <style>
     body {
       font-family: 'Meiryo', sans-serif;
