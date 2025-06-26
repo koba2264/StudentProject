@@ -47,7 +47,7 @@
 	  font-size: 14px;
 	  height: 36px;
 	  box-sizing: border-box;
-	
+
 	  /* ↓スピンボタン消して横幅対策 */
 	  -moz-appearance: textfield;
 	}
@@ -105,16 +105,6 @@
   	</c:forEach>
   </select>
   </label><br>
-      <label>性別:
-        <select id="gender_select" name="gender_select" required>
-          <option value="">選択してください</option>
-          <option value="01" ${gender.id == "01" ? 'selected' : ''}>男性</option>
-          <option value="02" ${gender.id == "02" ? 'selected' : ''}>女性</option>
-          <option value="03" ${gender.id == "03" ? 'selected' : ''}>無回答</option>
-        </select>
-
-  </label><br>
-
   <label>科目名:
   <select id="subject_select" name="subject_select" required>
   	<option value="" class="subject_id">選択してください</option>

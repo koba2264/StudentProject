@@ -69,7 +69,6 @@
     <ul>
       <li>クラス名: ${class_id}</li>
       <li>学生: ${student_id}</li>
-      <li>性別: ${gender_id}</li>
       <li>科目名: ${subject_id}</li>
       <li>回数: ${count}回目</li>
       <li>点数: ${score}点</li>

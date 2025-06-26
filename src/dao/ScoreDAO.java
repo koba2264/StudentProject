@@ -64,7 +64,7 @@ public class ScoreDAO extends DAO {
 	}
 
 	// 登録
-	public void insert(String student_id,String subject_id,Integer count,String class_id,Integer score,String gender_id) throws Exception{
+	public void insert(String student_id,String subject_id,Integer count,String class_id,Integer score) throws Exception{
 		Connection con = getConnection();
 		PreparedStatement ps = con.prepareStatement("INSERT INTO SCORE(STUDENT_ID,SUBJECT_ID,COUNT,CLASS_ID,SCORE) VALUES(?,?,?,?,?); ");
 		ps.setString(1,student_id);

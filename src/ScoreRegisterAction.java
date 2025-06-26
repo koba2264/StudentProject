@@ -7,12 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.Gender;
 import bean.MyClass;
 import bean.Student;
 import bean.Subject;
 import bean.User;
-import dao.GenderDAO;
 import dao.MyClassDAO;
 import dao.ScoreDAO;
 import dao.StudentDAO;
@@ -35,7 +33,6 @@ public class ScoreRegisterAction extends Action {
 
 		StudentDAO stuDAO = new StudentDAO();
 		SubjectDAO subDAO = new SubjectDAO();
-		GenderDAO genDAO = new GenderDAO();
 		ScoreDAO scoDAO = new ScoreDAO();
 		MyClassDAO clsDAO = new MyClassDAO();
 		List<String> clsIdList = new ArrayList<>();
@@ -51,14 +48,13 @@ public class ScoreRegisterAction extends Action {
 
 		List<Student> students = stuDAO.search("", "", class_id);
 		List<Subject> subjects = subDAO.ClassSearch(class_id);
-		Gender gender = genDAO.search(student_id);
+
 
 		List<Integer> count = scoDAO.sizeSearch(student_id,subject_id);
 
 
 		request.setAttribute("students", students);
 		request.setAttribute("subjects", subjects);
-		request.setAttribute("gender", gender);
 		request.setAttribute("count", count);
 		request.setAttribute("subject_id", subject_id);
 
