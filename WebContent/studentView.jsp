@@ -148,6 +148,7 @@
             <th>名前</th>
             <th>学籍番号</th>
             <th>削除</th>
+            <th>編集</th>
           </tr>
           <c:forEach var="student" items="${ students }">
             <tr>
@@ -165,6 +166,15 @@
 		                  <input type="submit" value="削除" class="delete-btn" disabled>
 		              </c:otherwise>
                   </c:choose>
+                </form>
+              </td>
+              <td>
+                <form action="StuUp.action" method="post">
+                  <input type="hidden" value="${ student.id }" name="id">
+                  <input type="hidden" value="${ student.name }" name="name">
+                  <input type="hidden" value="${ student.myClass.id }" name="classId">
+
+		          <input type="submit" value="編集">
                 </form>
               </td>
             </tr>

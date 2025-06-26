@@ -4,7 +4,7 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>ユーザー編集画面</title>
+  <title>学生編集画面</title>
   <style>
     body {
       font-family: 'Meiryo', sans-serif;
@@ -72,63 +72,20 @@
 <body>
 
   <div class="form-container">
-    <h2>ユーザー編集画面</h2>
+    <h2>学生編集画面</h2>
     <p>${ message }</p>
 
-    <form action="UpdateUser.action">
-      <c:choose>
-        <c:when test='${ role.id == "002" }'>
-          <input type="hidden" name="teacher" value="True">
-        </c:when>
-        <c:otherwise>
-          <input type="hidden" name="teacher" value="False">
-        </c:otherwise>
-      </c:choose>
-
-      <input type="hidden" name="id" value="${ user.userId }">
-
+    <form action="UpdateStu.action">
       <label>名前:
-        <input type="text" name="name" value="${ user.studentName }" required>
+        <input type="text" name="name" value="${ name }" required>
       </label>
-
-      <label>役職:
-        <select name="role" required>
-          <c:forEach var="role" items="${ roles }">
-            <c:choose>
-              <c:when test="${ user.role.id == role.id }">
-                <option value="${ role.id }:${role.roleName}" selected>${ role.roleName }</option>
-              </c:when>
-              <c:otherwise>
-                <option value="${ role.id }:${role.roleName}">${ role.roleName }</option>
-              </c:otherwise>
-            </c:choose>
-          </c:forEach>
-        </select>
-      </label>
-
-      <label>所属学校:
-        <select name="school" required>
-          <c:forEach var="school" items="${ schools }">
-            <c:choose>
-              <c:when test="${ user.school.id == school.id }">
-                <option value="${ school.id }:${ school.name }" selected>${ school.name }</option>
-              </c:when>
-              <c:otherwise>
-                <option value="${ school.id }:${ school.name }">${ school.name }</option>
-              </c:otherwise>
-            </c:choose>
-          </c:forEach>
-        </select>
-      </label>
-      <c:if test='${ user.role.id == "002" }'>
-	      <label>受け持ちクラス:
+	      <label>クラス:
 	        <select name="class" required>
 	        	<option value="131" selected>1-31</option>
 	        	<option value="231" selected>2-31</option>
 	        </select>
 	      </label>
-      </c:if>
-
+	  <input type="hidden" value="${ id }" name="id">
       <input type="submit" value="登録">
     </form>
           <form action="UserView.action" method="get">

@@ -26,8 +26,11 @@ public class UpdateUserAction extends Action {
 		role.setId(roleTmp[0]);
 		role.setRoleName(roleTmp[1]);
 		user.setRole(role);
+		String myClass = request.getParameter("class");
+
 
 		UserDAO dao = new UserDAO();
+		dao.myClass(myClass, user.getUserId());
 		if (dao.update(user)) {
 			if (request.getParameter("teacher") == "True" && role.getId() != "002") {
 				SubjectDAO subDao = new SubjectDAO();
